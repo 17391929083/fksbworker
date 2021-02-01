@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fksb.fksbselect.mapper.WtFksbDataRtrMapper">
+  <resultMap id="BaseResultMap" type="com.fksb.fksbselect.model.WtFksbDataRtrVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="MP_CD" jdbcType="VARCHAR" property="mpCd" />
+    <result column="DT_TT" jdbcType="TIMESTAMP" property="dtTt" />
+    <result column="TOTAL_QTY" jdbcType="DECIMAL" property="totalQty" />
+    <result column="SURPLUS_QTY" jdbcType="DECIMAL" property="surplusQty" />
+    <result column="V" jdbcType="DECIMAL" property="v" />
+    <result column="SIGNALS" jdbcType="INTEGER" property="signals" />
+    <result column="AlARM" jdbcType="INTEGER" property="alarm" />
+    <result column="VALVE_S" jdbcType="INTEGER" property="valveS" />
+    <result column="ISOK" jdbcType="INTEGER" property="isok" />
+    <result column="PREVIOUS_MONTH_QTY" jdbcType="DECIMAL" property="previousMonthQty" />
+    <result column="MONTH_LAST_QTY" jdbcType="DECIMAL" property="monthLastQty" />
+    <result column="MONTH_TOTAL_QTY" jdbcType="DECIMAL" property="monthTotalQty" />
+    <result column="YEAR_TOTAL_QTY" jdbcType="DECIMAL" property="yearTotalQty" />
+    <result column="SIGN" jdbcType="VARCHAR" property="sign" />
+    <result column="TS" jdbcType="TIMESTAMP" property="ts" />
+    <result column="Accumu_Water" jdbcType="DOUBLE" property="accumuWater" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, MP_CD, DT_TT, TOTAL_QTY, SURPLUS_QTY, V, SIGNALS, AlARM, VALVE_S, ISOK, PREVIOUS_MONTH_QTY, 
+    MONTH_LAST_QTY, MONTH_TOTAL_QTY, YEAR_TOTAL_QTY, SIGN, TS, Accumu_Water
+  </sql>
+  <select id="selectByExample" parameterType="com.fksb.fksbselect.model.WtFksbDataRtrVOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wt_fksb_data_rtr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wt_fksb_data_rtr
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from wt_fksb_data_rtr
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fksb.fksbselect.model.WtFksbDataRtrVOExample">
+    delete from wt_fksb_data_rtr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fksb.fksbselect.model.WtFksbDataRtrVO">
+    insert into wt_fksb_data_rtr (id, MP_CD, DT_TT, 
+      TOTAL_QTY, SURPLUS_QTY, V, 
+      SIGNALS, AlARM, VALVE_S, 
+      ISOK, PREVIOUS_MONTH_QTY, MONTH_LAST_QTY, 
+      MONTH_TOTAL_QTY, YEAR_TOTAL_QTY, SIGN, 
+      TS, Accumu_Water)
+    values (#{id,jdbcType=BIGINT}, #{mpCd,jdbcType=VARCHAR}, #{dtTt,jdbcType=TIMESTAMP}, 
+      #{totalQty,jdbcType=DECIMAL}, #{surplusQty,jdbcType=DECIMAL}, #{v,jdbcType=DECIMAL}, 
+      #{signals,jdbcType=INTEGER}, #{alarm,jdbcType=INTEGER}, #{valveS,jdbcType=INTEGER}, 
+      #{isok,jdbcType=INTEGER}, #{previousMonthQty,jdbcType=DECIMAL}, #{monthLastQty,jdbcType=DECIMAL}, 
+      #{monthTotalQty,jdbcType=DECIMAL}, #{yearTotalQty,jdbcType=DECIMAL}, #{sign,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=TIMESTAMP}, #{accumuWater,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fksb.fksbselect.model.WtFksbDataRtrVO">
+    insert into wt_fksb_data_rtr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mpCd != null">
+        MP_CD,
+      </if>
+      <if test="dtTt != null">
+        DT_TT,
+      </if>
+      <if test="totalQty != null">
+        TOTAL_QTY,
+      </if>
+      <if test="surplusQty != null">
+        SURPLUS_QTY,
+      </if>
+      <if test="v != null">
+        V,
+      </if>
+      <if test="signals != null">
+        SIGNALS,
+      </if>
+      <if test="alarm != null">
+        AlARM,
+      </if>
+      <if test="valveS != null">
+        VALVE_S,
+      </if>
+      <if test="isok != null">
+        ISOK,
+      </if>
+      <if test="previousMonthQty != null">
+        PREVIOUS_MONTH_QTY,
+      </if>
+      <if test="monthLastQty != null">
+        MONTH_LAST_QTY,
+      </if>
+      <if test="monthTotalQty != null">
+        MONTH_TOTAL_QTY,
+      </if>
+      <if test="yearTotalQty != null">
+        YEAR_TOTAL_QTY,
+      </if>
+      <if test="sign != null">
+        SIGN,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="accumuWater != null">
+        Accumu_Water,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mpCd != null">
+        #{mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="dtTt != null">
+        #{dtTt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalQty != null">
+        #{totalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="surplusQty != null">
+        #{surplusQty,jdbcType=DECIMAL},
+      </if>
+      <if test="v != null">
+        #{v,jdbcType=DECIMAL},
+      </if>
+      <if test="signals != null">
+        #{signals,jdbcType=INTEGER},
+      </if>
+      <if test="alarm != null">
+        #{alarm,jdbcType=INTEGER},
+      </if>
+      <if test="valveS != null">
+        #{valveS,jdbcType=INTEGER},
+      </if>
+      <if test="isok != null">
+        #{isok,jdbcType=INTEGER},
+      </if>
+      <if test="previousMonthQty != null">
+        #{previousMonthQty,jdbcType=DECIMAL},
+      </if>
+      <if test="monthLastQty != null">
+        #{monthLastQty,jdbcType=DECIMAL},
+      </if>
+      <if test="monthTotalQty != null">
+        #{monthTotalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="yearTotalQty != null">
+        #{yearTotalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="sign != null">
+        #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accumuWater != null">
+        #{accumuWater,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fksb.fksbselect.model.WtFksbDataRtrVOExample" resultType="java.lang.Long">
+    select count(*) from wt_fksb_data_rtr
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wt_fksb_data_rtr
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.mpCd != null">
+        MP_CD = #{record.mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtTt != null">
+        DT_TT = #{record.dtTt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.totalQty != null">
+        TOTAL_QTY = #{record.totalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.surplusQty != null">
+        SURPLUS_QTY = #{record.surplusQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.v != null">
+        V = #{record.v,jdbcType=DECIMAL},
+      </if>
+      <if test="record.signals != null">
+        SIGNALS = #{record.signals,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarm != null">
+        AlARM = #{record.alarm,jdbcType=INTEGER},
+      </if>
+      <if test="record.valveS != null">
+        VALVE_S = #{record.valveS,jdbcType=INTEGER},
+      </if>
+      <if test="record.isok != null">
+        ISOK = #{record.isok,jdbcType=INTEGER},
+      </if>
+      <if test="record.previousMonthQty != null">
+        PREVIOUS_MONTH_QTY = #{record.previousMonthQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthLastQty != null">
+        MONTH_LAST_QTY = #{record.monthLastQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthTotalQty != null">
+        MONTH_TOTAL_QTY = #{record.monthTotalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yearTotalQty != null">
+        YEAR_TOTAL_QTY = #{record.yearTotalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sign != null">
+        SIGN = #{record.sign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ts != null">
+        TS = #{record.ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accumuWater != null">
+        Accumu_Water = #{record.accumuWater,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wt_fksb_data_rtr
+    set id = #{record.id,jdbcType=BIGINT},
+      MP_CD = #{record.mpCd,jdbcType=VARCHAR},
+      DT_TT = #{record.dtTt,jdbcType=TIMESTAMP},
+      TOTAL_QTY = #{record.totalQty,jdbcType=DECIMAL},
+      SURPLUS_QTY = #{record.surplusQty,jdbcType=DECIMAL},
+      V = #{record.v,jdbcType=DECIMAL},
+      SIGNALS = #{record.signals,jdbcType=INTEGER},
+      AlARM = #{record.alarm,jdbcType=INTEGER},
+      VALVE_S = #{record.valveS,jdbcType=INTEGER},
+      ISOK = #{record.isok,jdbcType=INTEGER},
+      PREVIOUS_MONTH_QTY = #{record.previousMonthQty,jdbcType=DECIMAL},
+      MONTH_LAST_QTY = #{record.monthLastQty,jdbcType=DECIMAL},
+      MONTH_TOTAL_QTY = #{record.monthTotalQty,jdbcType=DECIMAL},
+      YEAR_TOTAL_QTY = #{record.yearTotalQty,jdbcType=DECIMAL},
+      SIGN = #{record.sign,jdbcType=VARCHAR},
+      TS = #{record.ts,jdbcType=TIMESTAMP},
+      Accumu_Water = #{record.accumuWater,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fksb.fksbselect.model.WtFksbDataRtrVO">
+    update wt_fksb_data_rtr
+    <set>
+      <if test="mpCd != null">
+        MP_CD = #{mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="dtTt != null">
+        DT_TT = #{dtTt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalQty != null">
+        TOTAL_QTY = #{totalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="surplusQty != null">
+        SURPLUS_QTY = #{surplusQty,jdbcType=DECIMAL},
+      </if>
+      <if test="v != null">
+        V = #{v,jdbcType=DECIMAL},
+      </if>
+      <if test="signals != null">
+        SIGNALS = #{signals,jdbcType=INTEGER},
+      </if>
+      <if test="alarm != null">
+        AlARM = #{alarm,jdbcType=INTEGER},
+      </if>
+      <if test="valveS != null">
+        VALVE_S = #{valveS,jdbcType=INTEGER},
+      </if>
+      <if test="isok != null">
+        ISOK = #{isok,jdbcType=INTEGER},
+      </if>
+      <if test="previousMonthQty != null">
+        PREVIOUS_MONTH_QTY = #{previousMonthQty,jdbcType=DECIMAL},
+      </if>
+      <if test="monthLastQty != null">
+        MONTH_LAST_QTY = #{monthLastQty,jdbcType=DECIMAL},
+      </if>
+      <if test="monthTotalQty != null">
+        MONTH_TOTAL_QTY = #{monthTotalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="yearTotalQty != null">
+        YEAR_TOTAL_QTY = #{yearTotalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="sign != null">
+        SIGN = #{sign,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        TS = #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accumuWater != null">
+        Accumu_Water = #{accumuWater,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fksb.fksbselect.model.WtFksbDataRtrVO">
+    update wt_fksb_data_rtr
+    set MP_CD = #{mpCd,jdbcType=VARCHAR},
+      DT_TT = #{dtTt,jdbcType=TIMESTAMP},
+      TOTAL_QTY = #{totalQty,jdbcType=DECIMAL},
+      SURPLUS_QTY = #{surplusQty,jdbcType=DECIMAL},
+      V = #{v,jdbcType=DECIMAL},
+      SIGNALS = #{signals,jdbcType=INTEGER},
+      AlARM = #{alarm,jdbcType=INTEGER},
+      VALVE_S = #{valveS,jdbcType=INTEGER},
+      ISOK = #{isok,jdbcType=INTEGER},
+      PREVIOUS_MONTH_QTY = #{previousMonthQty,jdbcType=DECIMAL},
+      MONTH_LAST_QTY = #{monthLastQty,jdbcType=DECIMAL},
+      MONTH_TOTAL_QTY = #{monthTotalQty,jdbcType=DECIMAL},
+      YEAR_TOTAL_QTY = #{yearTotalQty,jdbcType=DECIMAL},
+      SIGN = #{sign,jdbcType=VARCHAR},
+      TS = #{ts,jdbcType=TIMESTAMP},
+      Accumu_Water = #{accumuWater,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectMprFksbRtr" parameterType="java.lang.String" resultMap="BaseResultMap">
+   select id, mpr.MP_CD, DT_TT, TOTAL_QTY, SURPLUS_QTY, V, SIGNALS, AlARM, VALVE_S,
+   ISOK, PREVIOUS_MONTH_QTY,      MONTH_LAST_QTY, MONTH_TOTAL_QTY,
+   YEAR_TOTAL_QTY, SIGN, TS, Accumu_Water
+    from wt_fksb_data_rtr rtr right  join wt_equi_mp_r mpr on rtr.MP_CD=mpr.MP_CD
+  
+    and mpr.ORG_CD=#{orgCd,jdbcType=VARCHAR}
+    where mpr.EQUI_CD = #{equiid,jdbcType=VARCHAR}
+  </select>
+
+
+
+
+  <update id="updateWaterNumber" parameterType="map">
+    update ${table.tablename}
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.mpCd != null">
+        MP_CD = #{record.mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dtTt != null">
+        DT_TT = #{record.dtTt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.totalQty != null">
+        TOTAL_QTY = #{record.totalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.surplusQty != null">
+        SURPLUS_QTY = #{record.surplusQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.v != null">
+        V = #{record.v,jdbcType=DECIMAL},
+      </if>
+      <if test="record.signals != null">
+        SIGNALS = #{record.signals,jdbcType=INTEGER},
+      </if>
+      <if test="record.alarm != null">
+        AlARM = #{record.alarm,jdbcType=INTEGER},
+      </if>
+      <if test="record.valveS != null">
+        VALVE_S = #{record.valveS,jdbcType=INTEGER},
+      </if>
+      <if test="record.isok != null">
+        ISOK = #{record.isok,jdbcType=INTEGER},
+      </if>
+      <if test="record.previousMonthQty != null">
+        PREVIOUS_MONTH_QTY = #{record.previousMonthQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthLastQty != null">
+        MONTH_LAST_QTY = #{record.monthLastQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.monthTotalQty != null">
+        MONTH_TOTAL_QTY = #{record.monthTotalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yearTotalQty != null">
+        YEAR_TOTAL_QTY = #{record.yearTotalQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sign != null">
+        SIGN = #{record.sign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ts != null">
+        TS = #{record.ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.accumuWater != null">
+        Accumu_Water = #{record.accumuWater,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

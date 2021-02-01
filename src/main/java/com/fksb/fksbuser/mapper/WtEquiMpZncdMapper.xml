@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fksb.fksbuser.mapper.WtEquiMpZncdMapper">
+  <resultMap id="BaseResultMap" type="com.fksb.fksbuser.model.WtEquiMpZncdVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="MP_CD" jdbcType="VARCHAR" property="mpCd" />
+    <result column="townId" jdbcType="BIGINT" property="townid" />
+    <result column="villageId" jdbcType="BIGINT" property="villageid" />
+    <result column="houseNo" jdbcType="VARCHAR" property="houseno" />
+    <result column="household" jdbcType="VARCHAR" property="household" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="idCard" jdbcType="VARCHAR" property="idcard" />
+    <result column="waterMeterType" jdbcType="SMALLINT" property="watermetertype" />
+    <result column="waterType" jdbcType="SMALLINT" property="watertype" />
+    <result column="area" jdbcType="DECIMAL" property="area" />
+    <result column="useState" jdbcType="SMALLINT" property="usestate" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fksb.fksbuser.model.WtEquiMpZncdVO">
+    <result column="useStateDes" jdbcType="LONGVARCHAR" property="usestatedes" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, MP_CD, townId, villageId, houseNo, household, phone, idCard, waterMeterType, 
+    waterType, area, useState, status
+  </sql>
+  <sql id="Blob_Column_List">
+    useStateDes
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVOExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wt_equi_mp_zncb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wt_equi_mp_zncb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from wt_equi_mp_zncb
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from wt_equi_mp_zncb
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVOExample">
+    delete from wt_equi_mp_zncb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVO">
+    insert into wt_equi_mp_zncb (id, MP_CD, townId, 
+      villageId, houseNo, household, 
+      phone, idCard, waterMeterType, 
+      waterType, area, useState, 
+      status, useStateDes)
+    values (#{id,jdbcType=BIGINT}, #{mpCd,jdbcType=VARCHAR}, #{townid,jdbcType=BIGINT}, 
+      #{villageid,jdbcType=BIGINT}, #{houseno,jdbcType=VARCHAR}, #{household,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{watermetertype,jdbcType=SMALLINT}, 
+      #{watertype,jdbcType=SMALLINT}, #{area,jdbcType=DECIMAL}, #{usestate,jdbcType=SMALLINT}, 
+      #{status,jdbcType=INTEGER}, #{usestatedes,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVO">
+    insert into wt_equi_mp_zncb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mpCd != null">
+        MP_CD,
+      </if>
+      <if test="townid != null">
+        townId,
+      </if>
+      <if test="villageid != null">
+        villageId,
+      </if>
+      <if test="houseno != null">
+        houseNo,
+      </if>
+      <if test="household != null">
+        household,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="idcard != null">
+        idCard,
+      </if>
+      <if test="watermetertype != null">
+        waterMeterType,
+      </if>
+      <if test="watertype != null">
+        waterType,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="usestate != null">
+        useState,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="usestatedes != null">
+        useStateDes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mpCd != null">
+        #{mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="townid != null">
+        #{townid,jdbcType=BIGINT},
+      </if>
+      <if test="villageid != null">
+        #{villageid,jdbcType=BIGINT},
+      </if>
+      <if test="houseno != null">
+        #{houseno,jdbcType=VARCHAR},
+      </if>
+      <if test="household != null">
+        #{household,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="watermetertype != null">
+        #{watermetertype,jdbcType=SMALLINT},
+      </if>
+      <if test="watertype != null">
+        #{watertype,jdbcType=SMALLINT},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=DECIMAL},
+      </if>
+      <if test="usestate != null">
+        #{usestate,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="usestatedes != null">
+        #{usestatedes,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVOExample" resultType="java.lang.Long">
+    select count(*) from wt_equi_mp_zncb
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wt_equi_mp_zncb
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.mpCd != null">
+        MP_CD = #{record.mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.townid != null">
+        townId = #{record.townid,jdbcType=BIGINT},
+      </if>
+      <if test="record.villageid != null">
+        villageId = #{record.villageid,jdbcType=BIGINT},
+      </if>
+      <if test="record.houseno != null">
+        houseNo = #{record.houseno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.household != null">
+        household = #{record.household,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null">
+        idCard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.watermetertype != null">
+        waterMeterType = #{record.watermetertype,jdbcType=SMALLINT},
+      </if>
+      <if test="record.watertype != null">
+        waterType = #{record.watertype,jdbcType=SMALLINT},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=DECIMAL},
+      </if>
+      <if test="record.usestate != null">
+        useState = #{record.usestate,jdbcType=SMALLINT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.usestatedes != null">
+        useStateDes = #{record.usestatedes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update wt_equi_mp_zncb
+    set id = #{record.id,jdbcType=BIGINT},
+      MP_CD = #{record.mpCd,jdbcType=VARCHAR},
+      townId = #{record.townid,jdbcType=BIGINT},
+      villageId = #{record.villageid,jdbcType=BIGINT},
+      houseNo = #{record.houseno,jdbcType=VARCHAR},
+      household = #{record.household,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      idCard = #{record.idcard,jdbcType=VARCHAR},
+      waterMeterType = #{record.watermetertype,jdbcType=SMALLINT},
+      waterType = #{record.watertype,jdbcType=SMALLINT},
+      area = #{record.area,jdbcType=DECIMAL},
+      useState = #{record.usestate,jdbcType=SMALLINT},
+      status = #{record.status,jdbcType=INTEGER},
+      useStateDes = #{record.usestatedes,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wt_equi_mp_zncb
+    set id = #{record.id,jdbcType=BIGINT},
+      MP_CD = #{record.mpCd,jdbcType=VARCHAR},
+      townId = #{record.townid,jdbcType=BIGINT},
+      villageId = #{record.villageid,jdbcType=BIGINT},
+      houseNo = #{record.houseno,jdbcType=VARCHAR},
+      household = #{record.household,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      idCard = #{record.idcard,jdbcType=VARCHAR},
+      waterMeterType = #{record.watermetertype,jdbcType=SMALLINT},
+      waterType = #{record.watertype,jdbcType=SMALLINT},
+      area = #{record.area,jdbcType=DECIMAL},
+      useState = #{record.usestate,jdbcType=SMALLINT},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVO">
+    update wt_equi_mp_zncb
+    <set>
+      <if test="mpCd != null">
+        MP_CD = #{mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="townid != null">
+        townId = #{townid,jdbcType=BIGINT},
+      </if>
+      <if test="villageid != null">
+        villageId = #{villageid,jdbcType=BIGINT},
+      </if>
+      <if test="houseno != null">
+        houseNo = #{houseno,jdbcType=VARCHAR},
+      </if>
+      <if test="household != null">
+        household = #{household,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="watermetertype != null">
+        waterMeterType = #{watermetertype,jdbcType=SMALLINT},
+      </if>
+      <if test="watertype != null">
+        waterType = #{watertype,jdbcType=SMALLINT},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=DECIMAL},
+      </if>
+      <if test="usestate != null">
+        useState = #{usestate,jdbcType=SMALLINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="usestatedes != null">
+        useStateDes = #{usestatedes,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVO">
+    update wt_equi_mp_zncb
+    set MP_CD = #{mpCd,jdbcType=VARCHAR},
+      townId = #{townid,jdbcType=BIGINT},
+      villageId = #{villageid,jdbcType=BIGINT},
+      houseNo = #{houseno,jdbcType=VARCHAR},
+      household = #{household,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      idCard = #{idcard,jdbcType=VARCHAR},
+      waterMeterType = #{watermetertype,jdbcType=SMALLINT},
+      waterType = #{watertype,jdbcType=SMALLINT},
+      area = #{area,jdbcType=DECIMAL},
+      useState = #{usestate,jdbcType=SMALLINT},
+      status = #{status,jdbcType=INTEGER},
+      useStateDes = #{usestatedes,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fksb.fksbuser.model.WtEquiMpZncdVO">
+    update wt_equi_mp_zncb
+    set MP_CD = #{mpCd,jdbcType=VARCHAR},
+      townId = #{townid,jdbcType=BIGINT},
+      villageId = #{villageid,jdbcType=BIGINT},
+      houseNo = #{houseno,jdbcType=VARCHAR},
+      household = #{household,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      idCard = #{idcard,jdbcType=VARCHAR},
+      waterMeterType = #{watermetertype,jdbcType=SMALLINT},
+      waterType = #{watertype,jdbcType=SMALLINT},
+      area = #{area,jdbcType=DECIMAL},
+      useState = #{usestate,jdbcType=SMALLINT},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

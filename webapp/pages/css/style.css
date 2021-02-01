@@ -1,0 +1,23 @@
+.pui-header{
+	height: 0.88rem;
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	background:url(../images/topbg.jpg) center top no-repeat;
+	background-size: cover;
+	z-index: 999;
+}
+
+.pui-header .pui-title{
+	height: 0.88rem;
+	line-height: 0.88rem;
+	color: #FFFFFF;
+	font-weight:normal;
+	position: absolute;
+	left: 1rem;
+	right: 1rem;
+	text-align: center;
+	font-size: 0.34rem;
+	box-sizing: border-box;
+}

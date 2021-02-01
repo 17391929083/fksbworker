@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fksb.fksbenrol.mapper.WtEquiMprMapper">
+  <resultMap id="BaseResultMap" type="com.fksb.fksbenrol.model.WtEquiMprVO">
+    <id column="MP_CD" jdbcType="VARCHAR" property="mpCd" />
+    <result column="MP_NM" jdbcType="VARCHAR" property="mpNm" />
+    <result column="MP_LOC" jdbcType="VARCHAR" property="mpLoc" />
+    <result column="MP_DATE" jdbcType="TIMESTAMP" property="mpDate" />
+    <result column="MP_USER" jdbcType="VARCHAR" property="mpUser" />
+    <result column="MP_LONG" jdbcType="DECIMAL" property="mpLong" />
+    <result column="MP_LAT" jdbcType="DECIMAL" property="mpLat" />
+    <result column="IS_FATHER" jdbcType="BIT" property="isFather" />
+    <result column="MP_FATHER" jdbcType="VARCHAR" property="mpFather" />
+    <result column="PR_CD" jdbcType="CHAR" property="prCd" />
+    <result column="CI_CD" jdbcType="CHAR" property="ciCd" />
+    <result column="AD_CD" jdbcType="CHAR" property="adCd" />
+    <result column="SU_CD" jdbcType="VARCHAR" property="suCd" />
+    <result column="ORG_CD" jdbcType="VARCHAR" property="orgCd" />
+    <result column="CO_ID" jdbcType="BIGINT" property="coId" />
+    <result column="F_INDEX" jdbcType="INTEGER" property="fIndex" />
+    <result column="EQUI_CD" jdbcType="VARCHAR" property="equiCd" />
+    <result column="EQUI_PIC" jdbcType="VARCHAR" property="equiPic" />
+    <result column="EUQI_ID" jdbcType="BIGINT" property="euqiId" />
+    <result column="P_SUP_LIMIT" jdbcType="DECIMAL" property="pSupLimit" />
+    <result column="P_LOW_LIMIT" jdbcType="DECIMAL" property="pLowLimit" />
+    <result column="MP_TYPE" jdbcType="INTEGER" property="mpType" />
+    <result column="EQUI_NM" jdbcType="VARCHAR" property="equiNm" />
+    <result column="EQUI_PROD_DATE" jdbcType="TIMESTAMP" property="equiProdDate" />
+    <result column="EQUI_SIM" jdbcType="CHAR" property="equiSim" />
+    <result column="EQUI_SPEC" jdbcType="VARCHAR" property="equiSpec" />
+    <result column="MP_UNCD" jdbcType="VARCHAR" property="mpUncd" />
+    <result column="STATES" jdbcType="INTEGER" property="states" />
+    <result column="UP_TIME" jdbcType="TIMESTAMP" property="upTime" />
+    <result column="CONFIG" jdbcType="INTEGER" property="config" />
+    <result column="MONITOR_ELEMENTS" jdbcType="VARCHAR" property="monitorElements" />
+    <result column="SYT_LONG" jdbcType="DECIMAL" property="sytLong" />
+    <result column="SYT_LAT" jdbcType="DECIMAL" property="sytLat" />
+    <result column="EQUI_STATES" jdbcType="INTEGER" property="equiStates" />
+    <result column="YCZDJ_DIC_ID" jdbcType="BIGINT" property="yczdjDicId" />
+    <result column="DEV_VER_MARK" jdbcType="SMALLINT" property="devVerMark" />
+    <result column="MP_SORT" jdbcType="BIGINT" property="mpSort" />
+    <result column="MP_CALI" jdbcType="VARCHAR" property="mpCali" />
+    <result column="MP_MUNUCE" jdbcType="VARCHAR" property="mpMunuce" />
+    <result column="PicLine" jdbcType="VARCHAR" property="picline" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    MP_CD, MP_NM, MP_LOC, MP_DATE, MP_USER, MP_LONG, MP_LAT, IS_FATHER, MP_FATHER, PR_CD, 
+    CI_CD, AD_CD, SU_CD, ORG_CD, CO_ID, F_INDEX, EQUI_CD, EQUI_PIC, EUQI_ID, P_SUP_LIMIT, 
+    P_LOW_LIMIT, MP_TYPE, EQUI_NM, EQUI_PROD_DATE, EQUI_SIM, EQUI_SPEC, MP_UNCD, STATES, 
+    UP_TIME, CONFIG, MONITOR_ELEMENTS, SYT_LONG, SYT_LAT, EQUI_STATES, YCZDJ_DIC_ID, 
+    DEV_VER_MARK, MP_SORT, MP_CALI, MP_MUNUCE, PicLine
+  </sql>
+  <select id="selectByExample" parameterType="com.fksb.fksbenrol.model.WtEquiMprVOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wt_equi_mp_r
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wt_equi_mp_r
+    where MP_CD = #{mpCd,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wt_equi_mp_r
+    where MP_CD = #{mpCd,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fksb.fksbenrol.model.WtEquiMprVOExample">
+    delete from wt_equi_mp_r
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fksb.fksbenrol.model.WtEquiMprVO">
+    insert into wt_equi_mp_r (MP_CD, MP_NM, MP_LOC, 
+      MP_DATE, MP_USER, MP_LONG, 
+      MP_LAT, IS_FATHER, MP_FATHER, 
+      PR_CD, CI_CD, AD_CD, SU_CD, 
+      ORG_CD, CO_ID, F_INDEX, 
+      EQUI_CD, EQUI_PIC, EUQI_ID, 
+      P_SUP_LIMIT, P_LOW_LIMIT, MP_TYPE, 
+      EQUI_NM, EQUI_PROD_DATE, EQUI_SIM, 
+      EQUI_SPEC, MP_UNCD, STATES, 
+      UP_TIME, CONFIG, MONITOR_ELEMENTS, 
+      SYT_LONG, SYT_LAT, EQUI_STATES, 
+      YCZDJ_DIC_ID, DEV_VER_MARK, MP_SORT, 
+      MP_CALI, MP_MUNUCE, PicLine
+      )
+    values (#{mpCd,jdbcType=VARCHAR}, #{mpNm,jdbcType=VARCHAR}, #{mpLoc,jdbcType=VARCHAR}, 
+      #{mpDate,jdbcType=TIMESTAMP}, #{mpUser,jdbcType=VARCHAR}, #{mpLong,jdbcType=DECIMAL}, 
+      #{mpLat,jdbcType=DECIMAL}, #{isFather,jdbcType=BIT}, #{mpFather,jdbcType=VARCHAR}, 
+      #{prCd,jdbcType=CHAR}, #{ciCd,jdbcType=CHAR}, #{adCd,jdbcType=CHAR}, #{suCd,jdbcType=VARCHAR}, 
+      #{orgCd,jdbcType=VARCHAR}, #{coId,jdbcType=BIGINT}, #{fIndex,jdbcType=INTEGER}, 
+      #{equiCd,jdbcType=VARCHAR}, #{equiPic,jdbcType=VARCHAR}, #{euqiId,jdbcType=BIGINT}, 
+      #{pSupLimit,jdbcType=DECIMAL}, #{pLowLimit,jdbcType=DECIMAL}, #{mpType,jdbcType=INTEGER}, 
+      #{equiNm,jdbcType=VARCHAR}, #{equiProdDate,jdbcType=TIMESTAMP}, #{equiSim,jdbcType=CHAR}, 
+      #{equiSpec,jdbcType=VARCHAR}, #{mpUncd,jdbcType=VARCHAR}, #{states,jdbcType=INTEGER}, 
+      #{upTime,jdbcType=TIMESTAMP}, #{config,jdbcType=INTEGER}, #{monitorElements,jdbcType=VARCHAR}, 
+      #{sytLong,jdbcType=DECIMAL}, #{sytLat,jdbcType=DECIMAL}, #{equiStates,jdbcType=INTEGER}, 
+      #{yczdjDicId,jdbcType=BIGINT}, #{devVerMark,jdbcType=SMALLINT}, #{mpSort,jdbcType=BIGINT}, 
+      #{mpCali,jdbcType=VARCHAR}, #{mpMunuce,jdbcType=VARCHAR}, #{picline,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fksb.fksbenrol.model.WtEquiMprVO">
+    insert into wt_equi_mp_r
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mpCd != null">
+        MP_CD,
+      </if>
+      <if test="mpNm != null">
+        MP_NM,
+      </if>
+      <if test="mpLoc != null">
+        MP_LOC,
+      </if>
+      <if test="mpDate != null">
+        MP_DATE,
+      </if>
+      <if test="mpUser != null">
+        MP_USER,
+      </if>
+      <if test="mpLong != null">
+        MP_LONG,
+      </if>
+      <if test="mpLat != null">
+        MP_LAT,
+      </if>
+      <if test="isFather != null">
+        IS_FATHER,
+      </if>
+      <if test="mpFather != null">
+        MP_FATHER,
+      </if>
+      <if test="prCd != null">
+        PR_CD,
+      </if>
+      <if test="ciCd != null">
+        CI_CD,
+      </if>
+      <if test="adCd != null">
+        AD_CD,
+      </if>
+      <if test="suCd != null">
+        SU_CD,
+      </if>
+      <if test="orgCd != null">
+        ORG_CD,
+      </if>
+      <if test="coId != null">
+        CO_ID,
+      </if>
+      <if test="fIndex != null">
+        F_INDEX,
+      </if>
+      <if test="equiCd != null">
+        EQUI_CD,
+      </if>
+      <if test="equiPic != null">
+        EQUI_PIC,
+      </if>
+      <if test="euqiId != null">
+        EUQI_ID,
+      </if>
+      <if test="pSupLimit != null">
+        P_SUP_LIMIT,
+      </if>
+      <if test="pLowLimit != null">
+        P_LOW_LIMIT,
+      </if>
+      <if test="mpType != null">
+        MP_TYPE,
+      </if>
+      <if test="equiNm != null">
+        EQUI_NM,
+      </if>
+      <if test="equiProdDate != null">
+        EQUI_PROD_DATE,
+      </if>
+      <if test="equiSim != null">
+        EQUI_SIM,
+      </if>
+      <if test="equiSpec != null">
+        EQUI_SPEC,
+      </if>
+      <if test="mpUncd != null">
+        MP_UNCD,
+      </if>
+      <if test="states != null">
+        STATES,
+      </if>
+      <if test="upTime != null">
+        UP_TIME,
+      </if>
+      <if test="config != null">
+        CONFIG,
+      </if>
+      <if test="monitorElements != null">
+        MONITOR_ELEMENTS,
+      </if>
+      <if test="sytLong != null">
+        SYT_LONG,
+      </if>
+      <if test="sytLat != null">
+        SYT_LAT,
+      </if>
+      <if test="equiStates != null">
+        EQUI_STATES,
+      </if>
+      <if test="yczdjDicId != null">
+        YCZDJ_DIC_ID,
+      </if>
+      <if test="devVerMark != null">
+        DEV_VER_MARK,
+      </if>
+      <if test="mpSort != null">
+        MP_SORT,
+      </if>
+      <if test="mpCali != null">
+        MP_CALI,
+      </if>
+      <if test="mpMunuce != null">
+        MP_MUNUCE,
+      </if>
+      <if test="picline != null">
+        PicLine,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mpCd != null">
+        #{mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="mpNm != null">
+        #{mpNm,jdbcType=VARCHAR},
+      </if>
+      <if test="mpLoc != null">
+        #{mpLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="mpDate != null">
+        #{mpDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mpUser != null">
+        #{mpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="mpLong != null">
+        #{mpLong,jdbcType=DECIMAL},
+      </if>
+      <if test="mpLat != null">
+        #{mpLat,jdbcType=DECIMAL},
+      </if>
+      <if test="isFather != null">
+        #{isFather,jdbcType=BIT},
+      </if>
+      <if test="mpFather != null">
+        #{mpFather,jdbcType=VARCHAR},
+      </if>
+      <if test="prCd != null">
+        #{prCd,jdbcType=CHAR},
+      </if>
+      <if test="ciCd != null">
+        #{ciCd,jdbcType=CHAR},
+      </if>
+      <if test="adCd != null">
+        #{adCd,jdbcType=CHAR},
+      </if>
+      <if test="suCd != null">
+        #{suCd,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCd != null">
+        #{orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="coId != null">
+        #{coId,jdbcType=BIGINT},
+      </if>
+      <if test="fIndex != null">
+        #{fIndex,jdbcType=INTEGER},
+      </if>
+      <if test="equiCd != null">
+        #{equiCd,jdbcType=VARCHAR},
+      </if>
+      <if test="equiPic != null">
+        #{equiPic,jdbcType=VARCHAR},
+      </if>
+      <if test="euqiId != null">
+        #{euqiId,jdbcType=BIGINT},
+      </if>
+      <if test="pSupLimit != null">
+        #{pSupLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="pLowLimit != null">
+        #{pLowLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="mpType != null">
+        #{mpType,jdbcType=INTEGER},
+      </if>
+      <if test="equiNm != null">
+        #{equiNm,jdbcType=VARCHAR},
+      </if>
+      <if test="equiProdDate != null">
+        #{equiProdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="equiSim != null">
+        #{equiSim,jdbcType=CHAR},
+      </if>
+      <if test="equiSpec != null">
+        #{equiSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="mpUncd != null">
+        #{mpUncd,jdbcType=VARCHAR},
+      </if>
+      <if test="states != null">
+        #{states,jdbcType=INTEGER},
+      </if>
+      <if test="upTime != null">
+        #{upTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="config != null">
+        #{config,jdbcType=INTEGER},
+      </if>
+      <if test="monitorElements != null">
+        #{monitorElements,jdbcType=VARCHAR},
+      </if>
+      <if test="sytLong != null">
+        #{sytLong,jdbcType=DECIMAL},
+      </if>
+      <if test="sytLat != null">
+        #{sytLat,jdbcType=DECIMAL},
+      </if>
+      <if test="equiStates != null">
+        #{equiStates,jdbcType=INTEGER},
+      </if>
+      <if test="yczdjDicId != null">
+        #{yczdjDicId,jdbcType=BIGINT},
+      </if>
+      <if test="devVerMark != null">
+        #{devVerMark,jdbcType=SMALLINT},
+      </if>
+      <if test="mpSort != null">
+        #{mpSort,jdbcType=BIGINT},
+      </if>
+      <if test="mpCali != null">
+        #{mpCali,jdbcType=VARCHAR},
+      </if>
+      <if test="mpMunuce != null">
+        #{mpMunuce,jdbcType=VARCHAR},
+      </if>
+      <if test="picline != null">
+        #{picline,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fksb.fksbenrol.model.WtEquiMprVOExample" resultType="java.lang.Long">
+    select count(*) from wt_equi_mp_r
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wt_equi_mp_r
+    <set>
+      <if test="record.mpCd != null">
+        MP_CD = #{record.mpCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpNm != null">
+        MP_NM = #{record.mpNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpLoc != null">
+        MP_LOC = #{record.mpLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpDate != null">
+        MP_DATE = #{record.mpDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mpUser != null">
+        MP_USER = #{record.mpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpLong != null">
+        MP_LONG = #{record.mpLong,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mpLat != null">
+        MP_LAT = #{record.mpLat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isFather != null">
+        IS_FATHER = #{record.isFather,jdbcType=BIT},
+      </if>
+      <if test="record.mpFather != null">
+        MP_FATHER = #{record.mpFather,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prCd != null">
+        PR_CD = #{record.prCd,jdbcType=CHAR},
+      </if>
+      <if test="record.ciCd != null">
+        CI_CD = #{record.ciCd,jdbcType=CHAR},
+      </if>
+      <if test="record.adCd != null">
+        AD_CD = #{record.adCd,jdbcType=CHAR},
+      </if>
+      <if test="record.suCd != null">
+        SU_CD = #{record.suCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCd != null">
+        ORG_CD = #{record.orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coId != null">
+        CO_ID = #{record.coId,jdbcType=BIGINT},
+      </if>
+      <if test="record.fIndex != null">
+        F_INDEX = #{record.fIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.equiCd != null">
+        EQUI_CD = #{record.equiCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equiPic != null">
+        EQUI_PIC = #{record.equiPic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.euqiId != null">
+        EUQI_ID = #{record.euqiId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pSupLimit != null">
+        P_SUP_LIMIT = #{record.pSupLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pLowLimit != null">
+        P_LOW_LIMIT = #{record.pLowLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.mpType != null">
+        MP_TYPE = #{record.mpType,jdbcType=INTEGER},
+      </if>
+      <if test="record.equiNm != null">
+        EQUI_NM = #{record.equiNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.equiProdDate != null">
+        EQUI_PROD_DATE = #{record.equiProdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.equiSim != null">
+        EQUI_SIM = #{record.equiSim,jdbcType=CHAR},
+      </if>
+      <if test="record.equiSpec != null">
+        EQUI_SPEC = #{record.equiSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpUncd != null">
+        MP_UNCD = #{record.mpUncd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.states != null">
+        STATES = #{record.states,jdbcType=INTEGER},
+      </if>
+      <if test="record.upTime != null">
+        UP_TIME = #{record.upTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.config != null">
+        CONFIG = #{record.config,jdbcType=INTEGER},
+      </if>
+      <if test="record.monitorElements != null">
+        MONITOR_ELEMENTS = #{record.monitorElements,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sytLong != null">
+        SYT_LONG = #{record.sytLong,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sytLat != null">
+        SYT_LAT = #{record.sytLat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.equiStates != null">
+        EQUI_STATES = #{record.equiStates,jdbcType=INTEGER},
+      </if>
+      <if test="record.yczdjDicId != null">
+        YCZDJ_DIC_ID = #{record.yczdjDicId,jdbcType=BIGINT},
+      </if>
+      <if test="record.devVerMark != null">
+        DEV_VER_MARK = #{record.devVerMark,jdbcType=SMALLINT},
+      </if>
+      <if test="record.mpSort != null">
+        MP_SORT = #{record.mpSort,jdbcType=BIGINT},
+      </if>
+      <if test="record.mpCali != null">
+        MP_CALI = #{record.mpCali,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mpMunuce != null">
+        MP_MUNUCE = #{record.mpMunuce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.picline != null">
+        PicLine = #{record.picline,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wt_equi_mp_r
+    set MP_CD = #{record.mpCd,jdbcType=VARCHAR},
+      MP_NM = #{record.mpNm,jdbcType=VARCHAR},
+      MP_LOC = #{record.mpLoc,jdbcType=VARCHAR},
+      MP_DATE = #{record.mpDate,jdbcType=TIMESTAMP},
+      MP_USER = #{record.mpUser,jdbcType=VARCHAR},
+      MP_LONG = #{record.mpLong,jdbcType=DECIMAL},
+      MP_LAT = #{record.mpLat,jdbcType=DECIMAL},
+      IS_FATHER = #{record.isFather,jdbcType=BIT},
+      MP_FATHER = #{record.mpFather,jdbcType=VARCHAR},
+      PR_CD = #{record.prCd,jdbcType=CHAR},
+      CI_CD = #{record.ciCd,jdbcType=CHAR},
+      AD_CD = #{record.adCd,jdbcType=CHAR},
+      SU_CD = #{record.suCd,jdbcType=VARCHAR},
+      ORG_CD = #{record.orgCd,jdbcType=VARCHAR},
+      CO_ID = #{record.coId,jdbcType=BIGINT},
+      F_INDEX = #{record.fIndex,jdbcType=INTEGER},
+      EQUI_CD = #{record.equiCd,jdbcType=VARCHAR},
+      EQUI_PIC = #{record.equiPic,jdbcType=VARCHAR},
+      EUQI_ID = #{record.euqiId,jdbcType=BIGINT},
+      P_SUP_LIMIT = #{record.pSupLimit,jdbcType=DECIMAL},
+      P_LOW_LIMIT = #{record.pLowLimit,jdbcType=DECIMAL},
+      MP_TYPE = #{record.mpType,jdbcType=INTEGER},
+      EQUI_NM = #{record.equiNm,jdbcType=VARCHAR},
+      EQUI_PROD_DATE = #{record.equiProdDate,jdbcType=TIMESTAMP},
+      EQUI_SIM = #{record.equiSim,jdbcType=CHAR},
+      EQUI_SPEC = #{record.equiSpec,jdbcType=VARCHAR},
+      MP_UNCD = #{record.mpUncd,jdbcType=VARCHAR},
+      STATES = #{record.states,jdbcType=INTEGER},
+      UP_TIME = #{record.upTime,jdbcType=TIMESTAMP},
+      CONFIG = #{record.config,jdbcType=INTEGER},
+      MONITOR_ELEMENTS = #{record.monitorElements,jdbcType=VARCHAR},
+      SYT_LONG = #{record.sytLong,jdbcType=DECIMAL},
+      SYT_LAT = #{record.sytLat,jdbcType=DECIMAL},
+      EQUI_STATES = #{record.equiStates,jdbcType=INTEGER},
+      YCZDJ_DIC_ID = #{record.yczdjDicId,jdbcType=BIGINT},
+      DEV_VER_MARK = #{record.devVerMark,jdbcType=SMALLINT},
+      MP_SORT = #{record.mpSort,jdbcType=BIGINT},
+      MP_CALI = #{record.mpCali,jdbcType=VARCHAR},
+      MP_MUNUCE = #{record.mpMunuce,jdbcType=VARCHAR},
+      PicLine = #{record.picline,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fksb.fksbenrol.model.WtEquiMprVO">
+    update wt_equi_mp_r
+    <set>
+      <if test="mpNm != null">
+        MP_NM = #{mpNm,jdbcType=VARCHAR},
+      </if>
+      <if test="mpLoc != null">
+        MP_LOC = #{mpLoc,jdbcType=VARCHAR},
+      </if>
+      <if test="mpDate != null">
+        MP_DATE = #{mpDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mpUser != null">
+        MP_USER = #{mpUser,jdbcType=VARCHAR},
+      </if>
+      <if test="mpLong != null">
+        MP_LONG = #{mpLong,jdbcType=DECIMAL},
+      </if>
+      <if test="mpLat != null">
+        MP_LAT = #{mpLat,jdbcType=DECIMAL},
+      </if>
+      <if test="isFather != null">
+        IS_FATHER = #{isFather,jdbcType=BIT},
+      </if>
+      <if test="mpFather != null">
+        MP_FATHER = #{mpFather,jdbcType=VARCHAR},
+      </if>
+      <if test="prCd != null">
+        PR_CD = #{prCd,jdbcType=CHAR},
+      </if>
+      <if test="ciCd != null">
+        CI_CD = #{ciCd,jdbcType=CHAR},
+      </if>
+      <if test="adCd != null">
+        AD_CD = #{adCd,jdbcType=CHAR},
+      </if>
+      <if test="suCd != null">
+        SU_CD = #{suCd,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCd != null">
+        ORG_CD = #{orgCd,jdbcType=VARCHAR},
+      </if>
+      <if test="coId != null">
+        CO_ID = #{coId,jdbcType=BIGINT},
+      </if>
+      <if test="fIndex != null">
+        F_INDEX = #{fIndex,jdbcType=INTEGER},
+      </if>
+      <if test="equiCd != null">
+        EQUI_CD = #{equiCd,jdbcType=VARCHAR},
+      </if>
+      <if test="equiPic != null">
+        EQUI_PIC = #{equiPic,jdbcType=VARCHAR},
+      </if>
+      <if test="euqiId != null">
+        EUQI_ID = #{euqiId,jdbcType=BIGINT},
+      </if>
+      <if test="pSupLimit != null">
+        P_SUP_LIMIT = #{pSupLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="pLowLimit != null">
+        P_LOW_LIMIT = #{pLowLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="mpType != null">
+        MP_TYPE = #{mpType,jdbcType=INTEGER},
+      </if>
+      <if test="equiNm != null">
+        EQUI_NM = #{equiNm,jdbcType=VARCHAR},
+      </if>
+      <if test="equiProdDate != null">
+        EQUI_PROD_DATE = #{equiProdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="equiSim != null">
+        EQUI_SIM = #{equiSim,jdbcType=CHAR},
+      </if>
+      <if test="equiSpec != null">
+        EQUI_SPEC = #{equiSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="mpUncd != null">
+        MP_UNCD = #{mpUncd,jdbcType=VARCHAR},
+      </if>
+      <if test="states != null">
+        STATES = #{states,jdbcType=INTEGER},
+      </if>
+      <if test="upTime != null">
+        UP_TIME = #{upTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="config != null">
+        CONFIG = #{config,jdbcType=INTEGER},
+      </if>
+      <if test="monitorElements != null">
+        MONITOR_ELEMENTS = #{monitorElements,jdbcType=VARCHAR},
+      </if>
+      <if test="sytLong != null">
+        SYT_LONG = #{sytLong,jdbcType=DECIMAL},
+      </if>
+      <if test="sytLat != null">
+        SYT_LAT = #{sytLat,jdbcType=DECIMAL},
+      </if>
+      <if test="equiStates != null">
+        EQUI_STATES = #{equiStates,jdbcType=INTEGER},
+      </if>
+      <if test="yczdjDicId != null">
+        YCZDJ_DIC_ID = #{yczdjDicId,jdbcType=BIGINT},
+      </if>
+      <if test="devVerMark != null">
+        DEV_VER_MARK = #{devVerMark,jdbcType=SMALLINT},
+      </if>
+      <if test="mpSort != null">
+        MP_SORT = #{mpSort,jdbcType=BIGINT},
+      </if>
+      <if test="mpCali != null">
+        MP_CALI = #{mpCali,jdbcType=VARCHAR},
+      </if>
+      <if test="mpMunuce != null">
+        MP_MUNUCE = #{mpMunuce,jdbcType=VARCHAR},
+      </if>
+      <if test="picline != null">
+        PicLine = #{picline,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MP_CD = #{mpCd,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fksb.fksbenrol.model.WtEquiMprVO">
+    update wt_equi_mp_r
+    set MP_NM = #{mpNm,jdbcType=VARCHAR},
+      MP_LOC = #{mpLoc,jdbcType=VARCHAR},
+      MP_DATE = #{mpDate,jdbcType=TIMESTAMP},
+      MP_USER = #{mpUser,jdbcType=VARCHAR},
+      MP_LONG = #{mpLong,jdbcType=DECIMAL},
+      MP_LAT = #{mpLat,jdbcType=DECIMAL},
+      IS_FATHER = #{isFather,jdbcType=BIT},
+      MP_FATHER = #{mpFather,jdbcType=VARCHAR},
+      PR_CD = #{prCd,jdbcType=CHAR},
+      CI_CD = #{ciCd,jdbcType=CHAR},
+      AD_CD = #{adCd,jdbcType=CHAR},
+      SU_CD = #{suCd,jdbcType=VARCHAR},
+      ORG_CD = #{orgCd,jdbcType=VARCHAR},
+      CO_ID = #{coId,jdbcType=BIGINT},
+      F_INDEX = #{fIndex,jdbcType=INTEGER},
+      EQUI_CD = #{equiCd,jdbcType=VARCHAR},
+      EQUI_PIC = #{equiPic,jdbcType=VARCHAR},
+      EUQI_ID = #{euqiId,jdbcType=BIGINT},
+      P_SUP_LIMIT = #{pSupLimit,jdbcType=DECIMAL},
+      P_LOW_LIMIT = #{pLowLimit,jdbcType=DECIMAL},
+      MP_TYPE = #{mpType,jdbcType=INTEGER},
+      EQUI_NM = #{equiNm,jdbcType=VARCHAR},
+      EQUI_PROD_DATE = #{equiProdDate,jdbcType=TIMESTAMP},
+      EQUI_SIM = #{equiSim,jdbcType=CHAR},
+      EQUI_SPEC = #{equiSpec,jdbcType=VARCHAR},
+      MP_UNCD = #{mpUncd,jdbcType=VARCHAR},
+      STATES = #{states,jdbcType=INTEGER},
+      UP_TIME = #{upTime,jdbcType=TIMESTAMP},
+      CONFIG = #{config,jdbcType=INTEGER},
+      MONITOR_ELEMENTS = #{monitorElements,jdbcType=VARCHAR},
+      SYT_LONG = #{sytLong,jdbcType=DECIMAL},
+      SYT_LAT = #{sytLat,jdbcType=DECIMAL},
+      EQUI_STATES = #{equiStates,jdbcType=INTEGER},
+      YCZDJ_DIC_ID = #{yczdjDicId,jdbcType=BIGINT},
+      DEV_VER_MARK = #{devVerMark,jdbcType=SMALLINT},
+      MP_SORT = #{mpSort,jdbcType=BIGINT},
+      MP_CALI = #{mpCali,jdbcType=VARCHAR},
+      MP_MUNUCE = #{mpMunuce,jdbcType=VARCHAR},
+      PicLine = #{picline,jdbcType=VARCHAR}
+    where MP_CD = #{mpCd,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="selMaxMpcd" parameterType="com.fksb.fksbenrol.model.WtEquiMprVO" resultType="java.lang.String">
+    select max(MP_CD) from wt_equi_mp_r
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+</mapper>

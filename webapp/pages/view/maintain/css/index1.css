@@ -1,0 +1,57 @@
+@charset "utf-8";
+/* CSS Document */
+html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td {
+	margin: 0;
+	padding: 0;
+}
+/*字体*/
+body{font:14px/21px '微软雅黑';_font-family:'微软雅黑' !important; text-align:left; background:#fff;color:#333;}
+/*包裹 IE8居中*/
+#wrap{text-align:left;}
+/*ul*/
+ul{ list-style:none;}
+/*a*/
+a{ text-decoration:none;outline:none;}
+/*img*/
+img{border:0 none;max-width:100%;}
+/*浮动*/
+.fl{float:left; display:inline;}
+.fr{float:right; display:inline;}
+/*清除浮动*/
+.clear{clear:both;}
+/*塌陷*/
+.clearfix{zoom:1;}
+.clearfix:before,.clearfix:after{display: table;line-height: 0;content:"";}
+.clearfix:after{clear:both;}
+
+/*********乘客页面**************/
+.top{height:44px;line-height:44px;width:100%;/*background:#169bd5;*/background:#ccc;color:#fff;font-size:16px;text-align:center;}
+input{border:1px solid #ccc;}
+.tab{width:50%;text-align:center;}
+.centerMain{width:95%;margin:0 auto;}
+.tabActive{background:#169bd5;}
+.form1{margin-top:20px;}
+.inputCity{height:38px;width:45%;}
+.leftInput{width:75%;}
+.rightDiv{width:20%;}
+.mt40{margin-top:40px;}
+.mt10{margin-top:10px;}
+.mt20{margin-top:20px;}
+.border{border:1px solid #666;height:80px;border-left:none;margin-top:17px;position:relative;}
+.circle{position:absolute;height:30px;width:30px;border-radius:100%;background:#bfcdda;color:#fff;line-height:30px;text-align:center;font-size:16px;right:-15px;top:25px;}
+
+.select1{width:25%;height:38px;border:1px solid #ccc;}
+.span{line-height:38px;font-size:16px;width:10%;text-align:center;}
+
+.tel{height:38px;width:65%;}
+.name{width:25%;height:38px;}
+.cost,.code{height:38px;width:75%;}
+.imgCode{width:20%;margin-left:3%;height:38px;}
+.imgCode img{height:100%;}
+.btn1,.btn2{width:80%;margin:0 auto;display:block;height:38px;background:#169bd5;border:none;border-radius:5px;margin-top:20px;color:#fff;}
+.item{line-height:14px;text-align:center;}
+.foot{background:#169bd5;height:44px;text-align:center;color:#fff;margin-top:50px;line-height:44px;}
+/******我是司机********/
+.form2{margin-top:20px;display:none;}
+.input1{height:38px;width:45%;}
+.input2{width:25%;height:36px;margin-right:3%;}

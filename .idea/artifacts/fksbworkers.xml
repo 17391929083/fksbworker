@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="fksbworkers">
+    <output-path>$PROJECT_DIR$/out/artifacts/fksbworkers</output-path>
+    <root id="archive" name="fksbworkers.war">
+      <element id="artifact" artifact-name="fksbworker" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework:spring-aspects:5.2.8.RELEASE" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <context:component-scan base-package="com.fksb" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:include-filter>
+        
+    </context:component-scan>
+
+    <!--开启扫描-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+  
+
+
+    <!--<mvc:annotation-driven>-->
+        <!--<mvc:message-converters>-->
+            <!--<bean-->
+                    <!--class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+                <!--<property name="objectMapper">-->
+                    <!--<bean class="com.fasterxml.jackson.databind.ObjectMapper">-->
+                        <!--<property name="dateFormat">-->
+                            <!--<bean class="java.text.SimpleDateFormat">-->
+                                <!--<constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />-->
+                            <!--</bean>-->
+                        <!--</property>-->
+                    <!--</bean>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</mvc:message-converters>-->
+    <!--</mvc:annotation-driven>-->
+
+    <!--视图解析器-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id="viewResolver">
+        <property name="prefix" value="/pages/view"></property>
+        <property name="suffix" value=".jsp"></property>
+
+
+    </bean>
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    <property name="defaultEncoding" value="UTF‐8"></property>
+    <property name="maxUploadSize" value="5242880"></property>
+    </bean>
+
+    
+    <mvc:interceptors>
+            <mvc:interceptor>
+                <mvc:mapping path="/**"/>
+                <mvc:exclude-mapping path="/wxbdController/*"></mvc:exclude-mapping>
+                <mvc:exclude-mapping path="/workerEnterController/*"></mvc:exclude-mapping>
+                <mvc:exclude-mapping path="/**/*.css"/>
+                     <mvc:exclude-mapping path="/**/*.js"/>
+                        <mvc:exclude-mapping path="/**/*.png"/>
+                        <mvc:exclude-mapping path="/**/*.gif"/>
+                        <mvc:exclude-mapping path="/**/*.jpg"/>
+                <bean class="com.fksb.Interceptor.LoginInterceptor"></bean>
+            </mvc:interceptor>
+   </mvc:interceptors>
+
+</beans>

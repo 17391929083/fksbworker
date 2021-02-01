@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+
+
+
+    <context:component-scan base-package="com.fksb">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"></context:exclude-filter>
+    </context:component-scan>
+
+    <!--开启AOP-->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+
+    <context:property-placeholder location="classpath:db.properties" ></context:property-placeholder>
+
+    <bean  class="com.alibaba.druid.pool.DruidDataSource" id="dataSource">
+        <property name="username" value="${mysql.username}"></property>
+        <property name="password" value="${mysql.password}"></property>
+        <property name="url"    value="${mysql.url}"></property>
+        <property name="driverClassName" value="${mysql.driverClassName}"></property>
+    </bean>
+
+    <bean  class="org.mybatis.spring.SqlSessionFactoryBean"  id="sqlSessionFactory">
+        <!--指定spring 中的数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <property name="mapperLocations" value="classpath:com/fksb/*/mapper/*.xml"></property>
+
+
+
+    </bean>
+
+
+
+    <!--声明事事务-->
+    <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager"  id="transactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+
+
+    </bean>
+
+
+
+
+    <!--开启事务注解驱动-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+    <!--将mapper接口交给spring管理-->
+    <mybatis:scan base-package="com.fksb.*.mapper"></mybatis:scan>
+
+    <import resource="classpath*:spring-rabbitmq-product.xml" />
+
+
+</beans>

@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+/*********我是乘客的反馈页面*********/
+.tab{width:100%;}
+tr{background:#fff;}
+td{width:50%;line-height:25px;}
+.btn3,.btn7{width:80%;margin:0 auto;display:block;height:38px;background:#169bd5;border-radius:5px;color:#fff;text-align:center;line-height:38px;}
+.cry,.smile{width:60px;margin:0 auto;}
+.cry img,.smile img{width:100%;}
+.noResponse,.response{text-align:center;}
+.btn4,.btn5,.btn8,.btn9{width:45%;height:38px;line-height:38px;text-align:center;background:#169bd5;color:#fff;border-radius:5px;}
+.btn6,.btn10{border:none;width:80%;margin:0 auto;display:block;height:38px;background:#666;border-radius:5px;color:#ddd;text-align:center;line-height:38px;}
+/*********我是乘客的反馈页面********/

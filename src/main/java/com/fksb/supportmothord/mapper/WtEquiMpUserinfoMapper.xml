@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fksb.supportmothord.mapper.WtEquiMpUserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.fksb.supportmothord.model.WtEquiMpUserinfoVO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="delStatus" jdbcType="BIT" property="delstatus" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="idCard" jdbcType="VARCHAR" property="idcard" />
+    <result column="orgCd" jdbcType="VARCHAR" property="orgcd" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, addTime, delStatus, userName, phone, idCard, orgCd, status, ts
+  </sql>
+  <select id="selectByExample" parameterType="com.fksb.supportmothord.model.WtEquiMpUserinfoVOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wt_equi_mp_userinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wt_equi_mp_userinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from wt_equi_mp_userinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fksb.supportmothord.model.WtEquiMpUserinfoVOExample">
+    delete from wt_equi_mp_userinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fksb.supportmothord.model.WtEquiMpUserinfoVO">
+    insert into wt_equi_mp_userinfo (id, addTime, delStatus, 
+      userName, phone, idCard, 
+      orgCd, status, ts
+      )
+    values (#{id,jdbcType=BIGINT}, #{addtime,jdbcType=TIMESTAMP}, #{delstatus,jdbcType=BIT}, 
+      #{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{orgcd,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{ts,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fksb.supportmothord.model.WtEquiMpUserinfoVO" useGeneratedKeys="true" keyProperty="id">
+    insert into wt_equi_mp_userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="addtime != null">
+        addTime,
+      </if>
+      <if test="delstatus != null">
+        delStatus,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="idcard != null">
+        idCard,
+      </if>
+      <if test="orgcd != null">
+        orgCd,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delstatus != null">
+        #{delstatus,jdbcType=BIT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcd != null">
+        #{orgcd,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fksb.supportmothord.model.WtEquiMpUserinfoVOExample" resultType="java.lang.Long">
+    select count(*) from wt_equi_mp_userinfo
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wt_equi_mp_userinfo
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.addtime != null">
+        addTime = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delstatus != null">
+        delStatus = #{record.delstatus,jdbcType=BIT},
+      </if>
+      <if test="record.username != null">
+        userName = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcard != null">
+        idCard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgcd != null">
+        orgCd = #{record.orgcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.ts != null">
+        ts = #{record.ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wt_equi_mp_userinfo
+    set id = #{record.id,jdbcType=BIGINT},
+      addTime = #{record.addtime,jdbcType=TIMESTAMP},
+      delStatus = #{record.delstatus,jdbcType=BIT},
+      userName = #{record.username,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      idCard = #{record.idcard,jdbcType=VARCHAR},
+      orgCd = #{record.orgcd,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      ts = #{record.ts,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fksb.supportmothord.model.WtEquiMpUserinfoVO">
+    update wt_equi_mp_userinfo
+    <set>
+      <if test="addtime != null">
+        addTime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delstatus != null">
+        delStatus = #{delstatus,jdbcType=BIT},
+      </if>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="orgcd != null">
+        orgCd = #{orgcd,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fksb.supportmothord.model.WtEquiMpUserinfoVO">
+    update wt_equi_mp_userinfo
+    set addTime = #{addtime,jdbcType=TIMESTAMP},
+      delStatus = #{delstatus,jdbcType=BIT},
+      userName = #{username,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      idCard = #{idcard,jdbcType=VARCHAR},
+      orgCd = #{orgcd,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fksb.fksbenrol.mapper.WtAdBMapper">
+  <resultMap id="BaseResultMap" type="com.fksb.fksbenrol.model.WtAdBVO">
+    <id column="AD_CD" jdbcType="CHAR" property="adCd" />
+    <result column="AD_NM" jdbcType="VARCHAR" property="adNm" />
+    <result column="AD_SHNM" jdbcType="CHAR" property="adShnm" />
+    <result column="AD_A" jdbcType="DECIMAL" property="adA" />
+    <result column="OPER_CD" jdbcType="CHAR" property="operCd" />
+    <result column="TS" jdbcType="TIMESTAMP" property="ts" />
+    <result column="NT" jdbcType="VARCHAR" property="nt" />
+    <result column="AD_LONG" jdbcType="DECIMAL" property="adLong" />
+    <result column="AD_LAT" jdbcType="DECIMAL" property="adLat" />
+    <result column="PARENT_CD" jdbcType="CHAR" property="parentCd" />
+    <result column="isDisplay" jdbcType="SMALLINT" property="isdisplay" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    AD_CD, AD_NM, AD_SHNM, AD_A, OPER_CD, TS, NT, AD_LONG, AD_LAT, PARENT_CD, isDisplay
+  </sql>
+  <select id="selectByExample" parameterType="com.fksb.fksbenrol.model.WtAdBVOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wt_ad_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wt_ad_b
+    where AD_CD = #{adCd,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wt_ad_b
+    where AD_CD = #{adCd,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fksb.fksbenrol.model.WtAdBVOExample">
+    delete from wt_ad_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fksb.fksbenrol.model.WtAdBVO">
+    insert into wt_ad_b (AD_CD, AD_NM, AD_SHNM, 
+      AD_A, OPER_CD, TS, NT, 
+      AD_LONG, AD_LAT, PARENT_CD, 
+      isDisplay)
+    values (#{adCd,jdbcType=CHAR}, #{adNm,jdbcType=VARCHAR}, #{adShnm,jdbcType=CHAR}, 
+      #{adA,jdbcType=DECIMAL}, #{operCd,jdbcType=CHAR}, #{ts,jdbcType=TIMESTAMP}, #{nt,jdbcType=VARCHAR}, 
+      #{adLong,jdbcType=DECIMAL}, #{adLat,jdbcType=DECIMAL}, #{parentCd,jdbcType=CHAR}, 
+      #{isdisplay,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fksb.fksbenrol.model.WtAdBVO">
+    insert into wt_ad_b
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="adCd != null">
+        AD_CD,
+      </if>
+      <if test="adNm != null">
+        AD_NM,
+      </if>
+      <if test="adShnm != null">
+        AD_SHNM,
+      </if>
+      <if test="adA != null">
+        AD_A,
+      </if>
+      <if test="operCd != null">
+        OPER_CD,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="nt != null">
+        NT,
+      </if>
+      <if test="adLong != null">
+        AD_LONG,
+      </if>
+      <if test="adLat != null">
+        AD_LAT,
+      </if>
+      <if test="parentCd != null">
+        PARENT_CD,
+      </if>
+      <if test="isdisplay != null">
+        isDisplay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="adCd != null">
+        #{adCd,jdbcType=CHAR},
+      </if>
+      <if test="adNm != null">
+        #{adNm,jdbcType=VARCHAR},
+      </if>
+      <if test="adShnm != null">
+        #{adShnm,jdbcType=CHAR},
+      </if>
+      <if test="adA != null">
+        #{adA,jdbcType=DECIMAL},
+      </if>
+      <if test="operCd != null">
+        #{operCd,jdbcType=CHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nt != null">
+        #{nt,jdbcType=VARCHAR},
+      </if>
+      <if test="adLong != null">
+        #{adLong,jdbcType=DECIMAL},
+      </if>
+      <if test="adLat != null">
+        #{adLat,jdbcType=DECIMAL},
+      </if>
+      <if test="parentCd != null">
+        #{parentCd,jdbcType=CHAR},
+      </if>
+      <if test="isdisplay != null">
+        #{isdisplay,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fksb.fksbenrol.model.WtAdBVOExample" resultType="java.lang.Long">
+    select count(*) from wt_ad_b
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wt_ad_b
+    <set>
+      <if test="record.adCd != null">
+        AD_CD = #{record.adCd,jdbcType=CHAR},
+      </if>
+      <if test="record.adNm != null">
+        AD_NM = #{record.adNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adShnm != null">
+        AD_SHNM = #{record.adShnm,jdbcType=CHAR},
+      </if>
+      <if test="record.adA != null">
+        AD_A = #{record.adA,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operCd != null">
+        OPER_CD = #{record.operCd,jdbcType=CHAR},
+      </if>
+      <if test="record.ts != null">
+        TS = #{record.ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.nt != null">
+        NT = #{record.nt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adLong != null">
+        AD_LONG = #{record.adLong,jdbcType=DECIMAL},
+      </if>
+      <if test="record.adLat != null">
+        AD_LAT = #{record.adLat,jdbcType=DECIMAL},
+      </if>
+      <if test="record.parentCd != null">
+        PARENT_CD = #{record.parentCd,jdbcType=CHAR},
+      </if>
+      <if test="record.isdisplay != null">
+        isDisplay = #{record.isdisplay,jdbcType=SMALLINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wt_ad_b
+    set AD_CD = #{record.adCd,jdbcType=CHAR},
+      AD_NM = #{record.adNm,jdbcType=VARCHAR},
+      AD_SHNM = #{record.adShnm,jdbcType=CHAR},
+      AD_A = #{record.adA,jdbcType=DECIMAL},
+      OPER_CD = #{record.operCd,jdbcType=CHAR},
+      TS = #{record.ts,jdbcType=TIMESTAMP},
+      NT = #{record.nt,jdbcType=VARCHAR},
+      AD_LONG = #{record.adLong,jdbcType=DECIMAL},
+      AD_LAT = #{record.adLat,jdbcType=DECIMAL},
+      PARENT_CD = #{record.parentCd,jdbcType=CHAR},
+      isDisplay = #{record.isdisplay,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fksb.fksbenrol.model.WtAdBVO">
+    update wt_ad_b
+    <set>
+      <if test="adNm != null">
+        AD_NM = #{adNm,jdbcType=VARCHAR},
+      </if>
+      <if test="adShnm != null">
+        AD_SHNM = #{adShnm,jdbcType=CHAR},
+      </if>
+      <if test="adA != null">
+        AD_A = #{adA,jdbcType=DECIMAL},
+      </if>
+      <if test="operCd != null">
+        OPER_CD = #{operCd,jdbcType=CHAR},
+      </if>
+      <if test="ts != null">
+        TS = #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nt != null">
+        NT = #{nt,jdbcType=VARCHAR},
+      </if>
+      <if test="adLong != null">
+        AD_LONG = #{adLong,jdbcType=DECIMAL},
+      </if>
+      <if test="adLat != null">
+        AD_LAT = #{adLat,jdbcType=DECIMAL},
+      </if>
+      <if test="parentCd != null">
+        PARENT_CD = #{parentCd,jdbcType=CHAR},
+      </if>
+      <if test="isdisplay != null">
+        isDisplay = #{isdisplay,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where AD_CD = #{adCd,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fksb.fksbenrol.model.WtAdBVO">
+    update wt_ad_b
+    set AD_NM = #{adNm,jdbcType=VARCHAR},
+      AD_SHNM = #{adShnm,jdbcType=CHAR},
+      AD_A = #{adA,jdbcType=DECIMAL},
+      OPER_CD = #{operCd,jdbcType=CHAR},
+      TS = #{ts,jdbcType=TIMESTAMP},
+      NT = #{nt,jdbcType=VARCHAR},
+      AD_LONG = #{adLong,jdbcType=DECIMAL},
+      AD_LAT = #{adLat,jdbcType=DECIMAL},
+      PARENT_CD = #{parentCd,jdbcType=CHAR},
+      isDisplay = #{isdisplay,jdbcType=SMALLINT}
+    where AD_CD = #{adCd,jdbcType=CHAR}
+  </update>
+
+  <select id="selectAdAre" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+   SELECT replace(group_concat(wt_ad_b.AD_NM),',',' ') AS AD_NM,max(wt_ad_b.AD_CD) AS AD_CD FROM wt_ad_b WHERE wt_ad_b.AD_CD  in (
+
+
+         SELECT CONCAT(LEFT(AD_CD,2),"0000") AS adcd FROM wt_org_b WHERE ORG_CD=#{orgCd,jdbcType=CHAR}
+
+         union
+              SELECT CONCAT(LEFT(AD_CD,4),"00")AS adcd FROM wt_org_b WHERE ORG_CD=#{orgCd,jdbcType=CHAR}
+
+                 union
+              select AD_CD AS adcd from wt_org_b where ORG_CD=#{orgCd,jdbcType=CHAR}
+)
+
+
+
+
+ </select>
+
+  
+
+
+</mapper>
