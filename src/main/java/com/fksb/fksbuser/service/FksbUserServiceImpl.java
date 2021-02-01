@@ -160,6 +160,7 @@ public class FksbUserServiceImpl  implements FksbUserService {
             orgcdMaxMpcd.put("newMpcd"+orgCd,newMpcd);
         }else{
             fksbInserModel.setMpCd(Long.valueOf(orgcdMaxMpcd.get("newMpcd"+orgCd).toString())+1+"");
+            orgcdMaxMpcd.put("newMpcd"+orgCd,fksbInserModel.getMpCd());
       }
        return  fksbInserModel;
 

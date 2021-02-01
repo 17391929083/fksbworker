@@ -16,7 +16,7 @@
 	<script src="../pages/layui/layui.js?v=114" charset="UTF-8"></script>
 	<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 	<script src="../pages/js/ajax.js?v=114"></script>
-	<script src="../pages/view/user/js/user.js?v=119"></script>
+	<script src="../pages/view/user/js/user.js?v=12332"></script>
    <style type="text/css">
 
 

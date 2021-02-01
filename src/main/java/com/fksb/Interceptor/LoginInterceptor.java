@@ -31,18 +31,18 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         }
 
-        String userAgent = request.getHeader("user-agent").toLowerCase();
-        if(userAgent.indexOf("micromessenger")>-1){//微信客户端
-            request.setAttribute("isWx", "1");
-
-        }else{
-            request.setAttribute("isWx", "0");
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write("请使用微信客户端访问!");
-            return false;
-        }
+//        String userAgent = request.getHeader("user-agent").toLowerCase();
+//        if(userAgent.indexOf("micromessenger")>-1){//微信客户端
+//            request.setAttribute("isWx", "1");
+//
+//        }else{
+//            request.setAttribute("isWx", "0");
+//            response.setHeader("Access-Control-Allow-Origin", "*");
+//            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+//            response.setContentType("application/json;charset=UTF-8");
+//            response.getWriter().write("请使用微信客户端访问!");
+//            return false;
+//        }
 
         /*判断session 中是否有openid*/
         if(!StringUtils.isEmpty(request.getSession().getAttribute("fromUserName"))){

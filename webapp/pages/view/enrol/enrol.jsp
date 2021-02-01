@@ -141,7 +141,7 @@
 		<div class="register-item ">
 			<div class="inputs verifycode-inputs">
 				<label for="picName">图片名称：</label>
-				<input type="text"  lay-verify="required" name="equiPic" class="form-control" id="picName" readonly="readonly"/>
+				<input type="text"  lay-verify="required"  placeholder="请拍摄基表二维码"   name="equiPic" class="form-control" id="picName" readonly="readonly"/>
 				<%--<button type="button" class="layui-btn layui-bg-green" name="file" id="picupload">图片上传</button>--%>
 				<span id="getcode"><a href="javascript:void(0);" id="picupload" class="getcode">上传图片</a></span>
 
@@ -166,7 +166,7 @@
 	</section>
 	<!-- 注册按键 -->
 	<section class="register-btn">
-		<input type="submit" class="layui-btn" id="submit" lay-submit="" lay-filter="submit" value="提交信息"></input>
+		<input type="submit" class="layui-btn" id="submit" lay-submit="" lay-filter="submit" value="下一步"></input>
 
 	</section>
 

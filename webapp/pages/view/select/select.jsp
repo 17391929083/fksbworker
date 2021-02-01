@@ -66,7 +66,7 @@
 				</div>
 				<div class="ui-form-item ui-border-b">
 					<label>设备编码:</label> 
-					<input type="text" placeholder="设备编码" class="updateInfo"  value="${fksbInfoZncbVO.equiId}"  disabled="true" >
+					<input type="text" placeholder="设备编码"   value="${fksbInfoZncbVO.equiId}"  disabled="true" >
 				</div>
 
 				<div class="ui-form-item ui-border-b">
@@ -77,7 +77,7 @@
 					<label>
 						房屋面积:
 					</label>
-					<input type="text" placeholder="房屋面积"  name="homeAre" class="updateInfo"  style="margin-left:95px;" value="${fksbInfoZncbVO.homeAre==null?0.00:fksbInfoZncbVO.homeAre}" disabled="true" >
+					<input type="text" placeholder="房屋面积"  name="area" class="updateInfo"  style="margin-left:95px;" value="${fksbInfoZncbVO.homeAre==null?0.00:fksbInfoZncbVO.homeAre}" disabled="true" >
 					<!-- 若按钮不可点击则添加 disabled 类 -->
 					<button type="button" class="ui-border-l">平方米</button>
 				</div>

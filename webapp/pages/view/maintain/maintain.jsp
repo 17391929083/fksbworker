@@ -102,14 +102,14 @@
 				<label>
 					图片名称:
 				</label>
-				<input type="text" id="imgName"  name="pciLine" style="margin-left:95px;" >
+				<input type="text" id="imgName" placeholder="请拍摄旧表读数"  name="pciLine" style="margin-left:95px;" >
 				<!-- 若按钮不可点击则添加 disabled 类 -->
-                <button type="button" class="layui-btn layui-bg-green" name="file" id="loading">多图片上传</button>
+                <button type="button" class="layui-btn layui-bg-green" name="file" id="loading">图片上传</button>
 
             </div>
 
 
-            <button type="button" style="display: none"   class="layui-btn layui-bg-green" name="file" id="picupload">多图片上传</button>
+            <button type="button" style="display: none"   class="layui-btn layui-bg-green" name="file" id="picupload">上传图片</button>
 
             <div class="ui-form-item ui-form-item-r ui-border-b">
 

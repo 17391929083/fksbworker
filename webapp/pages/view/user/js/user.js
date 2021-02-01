@@ -60,7 +60,7 @@ layui.use(['carousel', 'form'], function(){
 
         }
         if(json.boole==0){
-        layer.confirm('您接下来要干啥?', {
+        layer.confirm('恭喜您!注册成功', {
             btn: ['继续注册','返回首页'] //按钮
         }, function(){
             window.location.href='../fksbEnrolController/index';
