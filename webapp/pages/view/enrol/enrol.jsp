@@ -17,7 +17,7 @@
 	<script src="../pages/layui/layui.js?v=114" charset="UTF-8"></script>
 	<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 	<script src="../pages/js/ajax.js?v=114"></script>
-	<script src="../pages/view/enrol/js/enrol.js?v=5117"></script>
+	<script src="../pages/view/enrol/js/enrol.js?v=266"></script>
    <style type="text/css">
 	   #selectTown input{
 		   height: 10%;

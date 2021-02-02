@@ -9,7 +9,7 @@ layui.use(['carousel', 'form','upload'], function(){
         datavillage(data);
         form.render();
     });
-
+    var loading =null;
     var uploadInst = upload.render({
         elem: '#picupload'
         ,url: '../fksbMainTainCintroller/picuPload' //改成您自己的上传接口
@@ -19,31 +19,30 @@ layui.use(['carousel', 'form','upload'], function(){
         ,ext: 'jpg|png|gif|bmp|jpeg'
         ,enctype:"multipart/form‐data"
         ,size: 0
-        // ,before: function(obj){
-        //     obj.preview(function(index, file, result) {
-        //         var size = file.size;
-        //         alert(size);
-        //         if (size > 3) {
-        //             layer.msg('文件大小不能超过3M');
-        //
-        //         }else{
-        //             obj.upload(index, file);
-        //         }
-        //     })
-        //     layer.close(index);
-        //
-        // }
+        ,before: function(obj){
+
+            loading= layer.load(2, {
+                shade: false,
+           
+
+            });
+
+        }
         ,done: function(res){
             $("#picName").val(res.imgName);
             $('#imgs1').attr('src', res.imgs1); //图片链接（base64）
+            layer.close(loading);
             return layer.msg('成功');
             //如果上传失败
             if(res.code > 0){
+                layer.close(loading);
                 return layer.msg('上传失败');
             }
             //上传成功
+
         }
         ,error: function(){
+           // layer.close(loading);
             //演示失败状态，并实现重传
             var demoText = $('#demoText');
             demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
