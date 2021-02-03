@@ -769,4 +769,13 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+
+  <select id="selInsertMaxMpcd" parameterType="com.fksb.fksbenrol.model.WtEquiMprVO" resultType="java.lang.String">
+
+    SELECT MAX(z.Mp_cd) FROM wt_equi_mp_zncb z,wt_equi_mp_r r
+    WHERE z.mp_cd=r.mp_cd
+    AND LENGTH(z.mp_cd)=15
+    AND z.mp_cd like  CONCAT ("%",#{code,jdbcType=VARCHAR},"%")
+  </select>
 </mapper>

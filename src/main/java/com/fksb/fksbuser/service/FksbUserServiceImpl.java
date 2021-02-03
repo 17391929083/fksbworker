@@ -140,27 +140,29 @@ public class FksbUserServiceImpl  implements FksbUserService {
     private  FksbInserModel  newMpcd(){
         FksbInserModel fksbInserModel= (FksbInserModel) session.getAttribute("fksbInserModel");
        Object  orgCd=session.getAttribute("orgCd");
-        if(orgcdMaxMpcd.get("newMpcd"+orgCd)==null){
+       if(orgcdMaxMpcd.get(fksbInserModel.getVilliid())==null){
             /*查询最大测点*/
             WtEquiMprVOExample wtEquiMprVOExample=new WtEquiMprVOExample();
             WtEquiMprVOExample.Criteria criteria=wtEquiMprVOExample.createCriteria();
             criteria.andOrgCdEqualTo(orgCd.toString());
-            String maxMpcd = wtEquiMprMapper.selMaxMpcd(wtEquiMprVOExample);
+            WtAdVillageVO wtAdVillageVO = wtAdVillageMapper.selectByPrimaryKey(fksbInserModel.getVilliid());
+            String maxMpcd = wtEquiMprMapper.selInsertMaxMpcd(wtAdVillageVO.getCode());
 
             if(StringUtils.isEmpty(maxMpcd)){
                 /*获取村code*/
-                WtAdVillageVO wtAdVillageVO = wtAdVillageMapper.selectByPrimaryKey(fksbInserModel.getVilliid());
+                // wtAdVillageVO = wtAdVillageMapper.selectByPrimaryKey(fksbInserModel.getVilliid());
                 String  newMpcd=wtAdVillageVO.getCode()+"00001";
-                orgcdMaxMpcd.put("newMpcd"+orgCd,newMpcd);
+                orgcdMaxMpcd.put(fksbInserModel.getVilliid()+"",newMpcd);
                 fksbInserModel.setMpCd(newMpcd);
+                maxMpcd=newMpcd;
             }
             //自动加1 返回去
             Long  newMpcd=Long.valueOf(maxMpcd)+1;
             fksbInserModel.setMpCd(newMpcd.toString());
-            orgcdMaxMpcd.put("newMpcd"+orgCd,newMpcd);
+            orgcdMaxMpcd.put(fksbInserModel.getVilliid()+"",newMpcd);
         }else{
             fksbInserModel.setMpCd(Long.valueOf(orgcdMaxMpcd.get("newMpcd"+orgCd).toString())+1+"");
-            orgcdMaxMpcd.put("newMpcd"+orgCd,fksbInserModel.getMpCd());
+            orgcdMaxMpcd.put(fksbInserModel.getVilliid()+"",fksbInserModel.getMpCd());
       }
        return  fksbInserModel;
 

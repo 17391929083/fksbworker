@@ -30,4 +30,7 @@ public interface WtEquiMprMapper {
 
 
     String  selMaxMpcd(WtEquiMprVOExample example);
+
+
+    String  selInsertMaxMpcd(String  code);
 }
