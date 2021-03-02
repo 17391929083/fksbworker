@@ -31,6 +31,21 @@ layui.use(['carousel', 'form'], function(){
                 $('#local').val(localhome);
         });
 
+    //默认prompt
+    $('#local').on('blur', function () {
+         $('#localHome1').val(0);
+        $('#localHome2').val(0);
+         $('#localHome3').val(0);
+        if(localHome1==null||localHome1==""||localHome2==null||localHome2==""){
+            layer.msg('楼号楼层不能为空!', {icon: 3});
+            return false;
+
+        }
+    });
+
+
+
+
     form.on('switch(status)', function(data){
         var checked = data.elem.checked;
 
@@ -41,6 +56,10 @@ layui.use(['carousel', 'form'], function(){
         }else{
             $(".hidezhuzhai").show();
             $(".hideclass").hide();
+
+
+
+
         }
 
     });
