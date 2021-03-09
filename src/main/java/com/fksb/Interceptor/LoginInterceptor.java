@@ -47,7 +47,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         /*判断session 中是否有openid*/
         if(!StringUtils.isEmpty(request.getSession().getAttribute("fromUserName"))){
             logger.info(request.getSession().getAttribute("fromUserName")+"=====查看登录user===========");
-            request.getSession().setMaxInactiveInterval(3600*24*3);
+            request.getSession().setMaxInactiveInterval(3600*24*7);
             return true;
         }else{
             response.sendRedirect(request.getContextPath()+"/wxbdController/sessionout");

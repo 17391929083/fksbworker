@@ -24,9 +24,9 @@
         </commentGenerator>
         <!--数据源 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://60.205.165.243:3306/watercloud"
+                        connectionURL="jdbc:mysql://123.56.158.209:3306/watercloud"
                         userId="root"
-                        password="watertech">
+                        password="Water@123">
             <property name="remarksReporting" value="true"></property>
 
 
@@ -37,13 +37,13 @@
             targetPackage 生成到哪个包下
             targetProject 生成到当前文件的哪个相对路径下
         -->
-        <javaModelGenerator targetPackage="com.fksb.fksbenrol.model" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.fksb.fksbmaintain.model" targetProject="src/main/java"/>
         <!--mapper xml映射文件
             sqlMapGenerator mapper xml映射文件生成规则
             targetPackage 生成到哪个包下
             targetProject 生成到当前文件的哪个相对路径下
         -->
-        <sqlMapGenerator targetPackage="com.fksb.fksbenrol.mapper" targetProject="src/main/java"></sqlMapGenerator>
+        <sqlMapGenerator targetPackage="com.fksb.fksbmaintain.mapper" targetProject="src/main/java"></sqlMapGenerator>
 
 
 
@@ -54,7 +54,7 @@
                 2.使用接口绑定的方式生成（要配置sqlMapGenerator）
             targetPackage 生成到哪个包下
             targetProject 生成到当前文件的哪个相对路径下-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fksb.fksbenrol.mapper" targetProject="src/main/java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fksb.fksbmaintain.mapper" targetProject="src/main/java"/>
 
  
 
@@ -64,7 +64,7 @@
         domainObjectName pojo类名
         mapperName 对应mapper接口的类名 和 mapper xml文件名
         -->
-        <table tableName="wt_equi_mp_r" domainObjectName="WtEquiMprVO" mapperName="WtEquiMprMapper" />
+        <table tableName="wt_equi_mp_repair" domainObjectName="WtEquiMpRepairVO" mapperName="WtEquiMpRepairMapper" />
 
     </context>
 </generatorConfiguration>

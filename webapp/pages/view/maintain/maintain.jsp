@@ -17,6 +17,7 @@
 	<link href="../pages/view/maintain/css/index.css?v=33332" rel="stylesheet" type="text/css" />
 	<script src="../pages/js/jquery-3.5.1.js?v=15674"></script>
 	<script src="../pages/js/saoyisao.js?v=15674"></script>
+	<script src="../pages/js/picImage.js?v=15674"></script>
 	<link rel="stylesheet" type="text/css" href="../pages/layui/css/layui.css?v=1132"/>
 	<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
 	<script src="../pages/layui/layui.js?v=235445" charset="UTF-8"></script>
@@ -104,12 +105,13 @@
 				</label>
 				<input type="text" id="imgName" placeholder="请拍摄旧表读数"  name="pciLine" style="margin-left:95px;" >
 				<!-- 若按钮不可点击则添加 disabled 类 -->
-                <button type="button" class="layui-btn layui-bg-green" name="file" id="loading">图片上传</button>
+                <button type="button" class="layui-btn layui-bg-green" onclick="creatPic('imgs1','imgName')">拍照上传</button>
 
             </div>
 
+		
 
-            <button type="button" style="display: none"   class="layui-btn layui-bg-green" name="file" id="picupload">上传图片</button>
+			<button type="button" style="display: none"   class="layui-btn layui-bg-green"  onclick="creatPic('imgs1','imgName')">拍照上传</button>
 
             <div class="ui-form-item ui-form-item-r ui-border-b">
 

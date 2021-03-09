@@ -4,7 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.fksb.fksbenrol.mapper.WtEquiMprMapper;
 import com.fksb.fksbenrol.model.WtEquiMprVO;
 import com.fksb.fksbenrol.model.WtEquiMprVOExample;
+import com.fksb.fksbmaintain.mapper.WtEquiMpRepairMapper;
 import com.fksb.fksbmaintain.model.FksbMainTainVO;
+import com.fksb.fksbmaintain.model.WtEquiMpRepairVO;
+import com.fksb.fksbmaintain.model.WtEquiMpRepairVOExample;
 import com.fksb.fksbselect.mapper.WtFksbDataRtrMapper;
 import com.fksb.fksbselect.model.WtFksbDataRtrVO;
 import com.fksb.fksbselect.model.WtFksbDataRtrVOExample;
@@ -18,6 +21,7 @@ import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -37,6 +41,9 @@ public class MainTainServiceRabbitMq implements ChannelAwareMessageListener {
     @Autowired
     private WtFksbDataRtrMapper wtFksbDataRtrMapper;
 
+    @Autowired
+    private WtEquiMpRepairMapper wtEquiMpRepairMapper;
+
     @Override
     public void onMessage(Message message, Channel channel) throws Exception {
         //获取消息的id 用于签收
@@ -51,7 +58,12 @@ public class MainTainServiceRabbitMq implements ChannelAwareMessageListener {
         int changeequiid = this.changeequiid(fksbMainTainVO);
         //更改用水量
          int i = this.changeWater(fksbMainTainVO);
-        channel.basicAck(deliveryTag,false);
+         //增加换表记录
+            int changeRecodeid = this.hangeFksbRecords(fksbMainTainVO);
+
+
+
+            channel.basicAck(deliveryTag,false);
         }catch (Exception ex){
             ex.printStackTrace();
 
@@ -114,6 +126,31 @@ public class MainTainServiceRabbitMq implements ChannelAwareMessageListener {
        return fbupdate+rtrupdate;
 
     }
+    //增加换表记录
+ public int  hangeFksbRecords(FksbMainTainVO  fksbMainTainVO){
+          //组装数据
+     //查询设备mpr表中的数据
+     WtEquiMprVO wtEquiMprVO = wtEquiMprMapper.selectByPrimaryKey(fksbMainTainVO.getMpcd());
+
+     WtEquiMpRepairVO wtEquiMpRepairVO = new WtEquiMpRepairVO();
+     wtEquiMpRepairVO.setMpCd(wtEquiMprVO.getMpCd());
+     wtEquiMpRepairVO.setMpNm(wtEquiMprVO.getMpNm());
+     wtEquiMpRepairVO.setCreatetime(new Date());
+     wtEquiMpRepairVO.setEuqiId(new Long(13));
+     wtEquiMpRepairVO.setAdCd(wtEquiMprVO.getAdCd());
+     wtEquiMpRepairVO.setOrgCd(wtEquiMprVO.getOrgCd());
+     wtEquiMpRepairVO.setRepType((short) 1);
+     wtEquiMpRepairVO.setEquiCdn(fksbMainTainVO.getNewEquiid());
+     wtEquiMpRepairVO.setEquiCdo(fksbMainTainVO.getOldEquiid());
+     wtEquiMpRepairVO.setDeletestatus(new byte[0]);
+     wtEquiMpRepairVO.setIsRegister(1);
+     wtEquiMpRepairVO.setModifytime(new Date());
+     wtEquiMpRepairVO.setRepDesc("云控水表设备更换:  新设备编号"+fksbMainTainVO.getNewEquiid()+"  旧设备编号"+fksbMainTainVO.getOldEquiid());
+     int i = wtEquiMpRepairMapper.insertSelective(wtEquiMpRepairVO);
+     return i;
+ }
+
+
 
 
 

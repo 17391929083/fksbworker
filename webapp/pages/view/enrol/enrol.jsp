@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="../pages/view/enrol/css/register-wap.css?v=345464" />
 	<script src="../pages/js/jquery-3.5.1.js?v=15674"></script>
 	<script src="../pages/js/saoyisao.js?v=56465464"></script>
+	<script src="../pages/js/picImage.js?v=15674"></script>
 	<link rel="stylesheet" type="text/css" href="../pages/layui/css/layui.css?v=201811012"/>
 	<script src="../pages/layui/layui.js?v=114" charset="UTF-8"></script>
 	<script src="http://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
@@ -143,7 +144,7 @@
 				<label for="picName">图片名称：</label>
 				<input type="text"  lay-verify="required"  placeholder="请拍摄基表二维码"   name="equiPic" class="form-control" id="picName" readonly="readonly"/>
 				<%--<button type="button" class="layui-btn layui-bg-green" name="file" id="picupload">图片上传</button>--%>
-				<span id="getcode"><a href="javascript:void(0);" id="picupload" class="getcode">上传图片</a></span>
+				<span id="getcode"><a href="javascript:void(0);" onclick="creatPic('imgs1','picName')" class="getcode">拍照上传</a></span>
 
 			</div>
 			<div class="tip">请输验证码</div>

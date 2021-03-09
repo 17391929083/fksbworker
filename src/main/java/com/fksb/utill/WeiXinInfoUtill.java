@@ -3,6 +3,12 @@ package com.fksb.utill;
 import com.alibaba.fastjson.JSONObject;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
@@ -17,8 +23,8 @@ import java.util.Map;
  */
 public class WeiXinInfoUtill {
 
-    private static  String GET_WEIJIEHAO_URL = "http://123.56.158.209/jeewx/openDataController.do?JiekouWeixinToken&weixinId=WEIXINID";
-    private static  String APPID = "wxdab3c000e1d5d3d2";
+    public static  final  String GET_WEIJIEHAO_URL = "http://123.56.158.209/jeewx/openDataController.do?JiekouWeixinToken&weixinId=WEIXINID";
+    public  static  final   String APPID = "wxdab3c000e1d5d3d2";
 
 
 
@@ -78,8 +84,74 @@ public class WeiXinInfoUtill {
         return mParms;
     }
 
-    /*获取用户信息*/
+    /**
+     * 获取临时素材
+     */
+    public static InputStream getMedia(String mediaId) {
+        String url = "https://api.weixin.qq.com/cgi-bin/media/get";
+        JSONObject json = HttpUtil.sendJson(GET_WEIJIEHAO_URL.replace("WEIXINID", "gh_97eaf6ef183d"));
 
+        String access_token = json.get("accountaccesstoken").toString();
+        String params = "access_token=" + access_token + "&media_id=" + mediaId;
+        InputStream is = null;
+        try {
+            String urlNameString = url + "?" + params;
+            URL urlGet = new URL(urlNameString);
+            HttpURLConnection http = (HttpURLConnection) urlGet.openConnection();
+            http.setRequestMethod("GET"); // 必须是get方式请求
+            http.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+            http.setDoOutput(true);
+            http.setDoInput(true);
+            http.connect();
+            // 获取文件转化为byte流
+            is = http.getInputStream();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return is;
+    }
+
+    /**
+     * 保存微信端图片至服务器
+     * @param mediaId
+     * @return 文件名
+     */
+    public static String saveImageToDisk(String mediaId){
+        String filename = "";
+        InputStream inputStream = getMedia(mediaId);
+        byte[] data = new byte[1024];
+        int len = 0;
+        FileOutputStream fileOutputStream = null;
+        try {
+            //服务器存图路径
+            String path = "/usr/local/tomcat8/webapps/uploadpic/"  ;
+
+            filename = System.currentTimeMillis()+".jpg";
+            File imageFile = new File(path+filename);
+            fileOutputStream = new FileOutputStream(imageFile);
+            while ((len = inputStream.read(data)) != -1) {
+                fileOutputStream.write(data, 0, len);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (fileOutputStream != null) {
+                try {
+                    fileOutputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return filename;
+    }
 
 
 }

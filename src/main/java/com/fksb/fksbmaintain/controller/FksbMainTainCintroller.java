@@ -3,6 +3,8 @@ package com.fksb.fksbmaintain.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.fksb.fksbmaintain.model.FksbMainTainVO;
 import com.fksb.fksbmaintain.service.FksbMainTainService;
+import com.fksb.utill.HttpUtil;
+import com.fksb.utill.WeiXinInfoUtill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -120,8 +126,22 @@ public class FksbMainTainCintroller {
       return (JSONObject) JSONObject.toJSON(map);
     }
 
+    /**
+     *  从微信服务器端获取图片和处理图片
+     * */
+    @ResponseBody
+    @PostMapping("/getwxpic")
+    public JSONObject getwxpic(String serverId){
+        //获取tooken
+        String srcName = WeiXinInfoUtill.saveImageToDisk(serverId);
+
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("src","/uploadpic/"+srcName);
+        return (JSONObject) JSONObject.toJSON(map);
+        
 
 
+    }
 
 
 
