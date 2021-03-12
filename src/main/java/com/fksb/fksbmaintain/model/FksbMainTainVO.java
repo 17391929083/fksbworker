@@ -1,5 +1,7 @@
 package com.fksb.fksbmaintain.model;
 
+import com.fksb.worker.model.WxBdWaterVO;
+
 import java.math.BigDecimal;
 
 /*
@@ -20,6 +22,8 @@ public class FksbMainTainVO {
     private String orgcd;
 
     private String mpcd;
+
+    private WxBdWaterVO wxBdWaterVOS;
 
     public String getOldEquiid() {
         return oldEquiid;
@@ -67,5 +71,14 @@ public class FksbMainTainVO {
 
     public void setMpcd(String mpcd) {
         this.mpcd = mpcd;
+    }
+
+
+    public WxBdWaterVO getWxBdWaterVOS() {
+        return wxBdWaterVOS;
+    }
+
+    public void setWxBdWaterVOS(WxBdWaterVO wxBdWaterVOS) {
+        this.wxBdWaterVOS = wxBdWaterVOS;
     }
 }

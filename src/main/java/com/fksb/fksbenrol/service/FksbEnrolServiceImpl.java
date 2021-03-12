@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /*
  *@Author 常胜杰  QQ1209939478
@@ -56,11 +57,17 @@ public class FksbEnrolServiceImpl  implements FksbEnrolService {
                 //所属机构
                 WtOrgBVO wtOrgBVO = new WtOrgBVO();
                 List<WtOrgBVO>   list= (List<WtOrgBVO>) CacheUtil.getInstance().getCacheData("listWtOrgcd");
-                wtOrgBVO = list.stream().filter(e -> e.getOrgCd().equals(orgCd)).findAny().get();
-                if(wtOrgBVO==null){
+
+                Stream<WtOrgBVO> wtOrgBVOStream = list.stream().filter(e -> e.getOrgCd().equals(orgCd));
+
+                //;
+                if(wtOrgBVOStream.count()==0){
                     wtOrgBVO=this.selectOrgCDNm(orgCd);
                     list.add(wtOrgBVO);
                     CacheUtil.getInstance().addCacheData("listWtOrgcd",list);
+                }else{
+                    wtOrgBVO =list.stream().filter(e -> e.getOrgCd().equals(orgCd)).findAny().get();
+
                 }
                 //查询乡镇
                 WtAdTownVOExample wtAdTownVOExample=new WtAdTownVOExample();

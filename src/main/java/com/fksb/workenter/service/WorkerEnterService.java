@@ -3,6 +3,7 @@ package com.fksb.workenter.service;
 import com.fksb.workenter.model.SysAccountVO;
 import com.fksb.workenter.model.SysAccountVOExample;
 import com.fksb.workenter.model.SysUserVO;
+import com.fksb.worker.model.WxBdWaterVO;
 
 import java.util.List;
 
@@ -24,5 +25,5 @@ public interface WorkerEnterService {
     * 核验用户是否实名认证
     *
     * */
-    long  checkBdWater(String userFromName);
+    List<WxBdWaterVO>  checkBdWater(String userFromName);
 }

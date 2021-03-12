@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fksb.workenter.model.SysAccountVO;
 import com.fksb.workenter.model.SysUserVO;
 import com.fksb.workenter.service.WorkerEnterService;
+import com.fksb.worker.model.WxBdWaterVO;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,12 +44,15 @@ public class WorkerEnterController {
     public ModelAndView  index(String fromUserName){
         ModelAndView view=new ModelAndView();
         //数据库查询是否实名认证
-        long l = workerEnterService.checkBdWater(fromUserName);
-        session.setAttribute("fromUserName",fromUserName);
+        List<WxBdWaterVO> wxBdWaterVOS = workerEnterService.checkBdWater(fromUserName);
+
         //如果用户没有认证跳转认证页面
-        if(l>0){
+        if(wxBdWaterVOS.size()>0){
+            session.setAttribute("fromUserName",fromUserName);
+            session.setAttribute("userinfo",wxBdWaterVOS.get(0));
              view.setViewName("/enter/enter");
         }else{
+
             view.setViewName("/login/login");
 
         }

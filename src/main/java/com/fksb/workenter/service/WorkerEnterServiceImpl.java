@@ -7,6 +7,7 @@ import com.fksb.workenter.model.SysAccountVO;
 import com.fksb.workenter.model.SysAccountVOExample;
 import com.fksb.workenter.model.SysUserVO;
 import com.fksb.worker.mapper.WxBdWaterMapper;
+import com.fksb.worker.model.WxBdWaterVO;
 import com.fksb.worker.model.WxBdWaterVOExample;
 import com.fksb.worker.service.WxBdWaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +51,12 @@ public  class WorkerEnterServiceImpl implements WorkerEnterService {
     }
 
     @Override
-    public long checkBdWater(String userFromName) {
+    public List<WxBdWaterVO> checkBdWater(String userFromName) {
         WxBdWaterVOExample wxBdWaterVOExample = new WxBdWaterVOExample();
         WxBdWaterVOExample.Criteria criteria=wxBdWaterVOExample.createCriteria();
         criteria.andOpenidEqualTo(userFromName);
-        long checkBdWater = wxBdWaterMapper.countByExample(wxBdWaterVOExample);
-
-        return checkBdWater;
+        List<WxBdWaterVO> wxBdWaterVOS = wxBdWaterMapper.selectByExample(wxBdWaterVOExample);
+        
+          return wxBdWaterVOS;
     }
 }

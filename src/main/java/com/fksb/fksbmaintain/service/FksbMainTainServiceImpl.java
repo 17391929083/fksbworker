@@ -5,6 +5,7 @@ import com.fksb.fksbenrol.model.WtEquiMprVO;
 import com.fksb.fksbenrol.model.WtEquiMprVOExample;
 import com.fksb.fksbmaintain.model.FksbMainTainVO;
 import com.fksb.fksbselect.service.FksbSelectService;
+import com.fksb.worker.model.WxBdWaterVO;
 import com.fksb.worker.utill.RandUtil;
 import com.rabbitmq.client.Return;
 import com.rabbitmq.client.ReturnCallback;
@@ -57,6 +58,8 @@ public class FksbMainTainServiceImpl  implements FksbMainTainService {
         try{
             fksbMainTainVO.setOrgcd(session.getAttribute("orgCd").toString());
             fksbMainTainVO.setMpcd(mpcd);
+            fksbMainTainVO.setWxBdWaterVOS((WxBdWaterVO) session.getAttribute("userinfo"));
+
             rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
             rabbitTemplate.convertAndSend(RandUtil.FKSB_MAINTAIN_EXCGABGE, RandUtil.FKSB_MAINTAIN_key, fksbMainTainVO);
             sign=0;//表示正常

@@ -15,6 +15,7 @@ import com.fksb.supportmothord.mapper.FbTableMapper;
 import com.fksb.supportmothord.model.FbTableVO;
 import com.fksb.supportmothord.model.FbTableVOExample;
 import com.fksb.utill.CacheUtil;
+import com.fksb.worker.model.WxBdWaterVO;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
@@ -131,7 +132,8 @@ public class MainTainServiceRabbitMq implements ChannelAwareMessageListener {
           //组装数据
      //查询设备mpr表中的数据
      WtEquiMprVO wtEquiMprVO = wtEquiMprMapper.selectByPrimaryKey(fksbMainTainVO.getMpcd());
-
+     //得到传递过来的信息数据
+     WxBdWaterVO wxBdWaterVOS = fksbMainTainVO.getWxBdWaterVOS();
      WtEquiMpRepairVO wtEquiMpRepairVO = new WtEquiMpRepairVO();
      wtEquiMpRepairVO.setMpCd(wtEquiMprVO.getMpCd());
      wtEquiMpRepairVO.setMpNm(wtEquiMprVO.getMpNm());
@@ -144,8 +146,9 @@ public class MainTainServiceRabbitMq implements ChannelAwareMessageListener {
      wtEquiMpRepairVO.setEquiCdo(fksbMainTainVO.getOldEquiid());
      wtEquiMpRepairVO.setDeletestatus(new byte[0]);
      wtEquiMpRepairVO.setIsRegister(1);
+     wtEquiMpRepairVO.setRepPer(wxBdWaterVOS.getWorkername());
      wtEquiMpRepairVO.setModifytime(new Date());
-     wtEquiMpRepairVO.setRepDesc("云控水表设备更换:  新设备编号"+fksbMainTainVO.getNewEquiid()+"  旧设备编号"+fksbMainTainVO.getOldEquiid());
+     wtEquiMpRepairVO.setRepDesc("云控水表设备更换:  新设备编号"+fksbMainTainVO.getNewEquiid()+" 旧设备编号"+fksbMainTainVO.getOldEquiid()+" 维护人手机号"+wxBdWaterVOS.getPhone());
      int i = wtEquiMpRepairMapper.insertSelective(wtEquiMpRepairVO);
      return i;
  }
