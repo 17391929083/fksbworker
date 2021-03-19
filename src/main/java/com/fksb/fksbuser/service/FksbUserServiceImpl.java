@@ -189,8 +189,10 @@ public class FksbUserServiceImpl  implements FksbUserService {
         wtEquiMprVO.setOrgCd(fksbInserModel.getOrgCd());
         wtEquiMprVO.setEquiCd(fksbInserModel.getEquicd());
         wtEquiMprVO.setEuqiId(new Long(13));
+        wtEquiMprVO.setMpType(14);
         wtEquiMprVO.setMpUser(fksbInserModel.getMpUser());
         wtEquiMprVO.setEquiPic(fksbInserModel.getEquiPic());
+        wtEquiMprVO.setConfig(0);
         wtEquiMprVO.setStates(0);
         wtEquiMprVO.setEquiStates(0);
         /*口径和通讯方式*/  //后续添加
