@@ -57,5 +57,7 @@
 
     <import resource="classpath*:spring-rabbitmq-product.xml" />
 
+    <import resource="classpath*:spring-redis.xml" />
+
 
 </beans>

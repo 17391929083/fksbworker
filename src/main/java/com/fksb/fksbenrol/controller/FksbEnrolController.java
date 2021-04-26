@@ -110,6 +110,19 @@ public class FksbEnrolController {
 
 
 
+    /*查询redis 获取截取规则*/
+
+    @ResponseBody
+    @RequestMapping("getequiidrule")
+    public JSONObject getequiidRule(HttpServletRequest request){
+        String orgCd = session.getAttribute("orgCd").toString();
+        //从redis中查询规则
+        Map<String, Object> map = fksbEnrolService.getequiidRule(orgCd);
+
+        return  (JSONObject) JSONObject.toJSON(map);
+    }
+
+
     @ResponseBody
     @RequestMapping("fksbEnrol")
     public JSONObject fksbEnrol() throws InterruptedException {

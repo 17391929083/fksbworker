@@ -20,6 +20,7 @@ import com.fksb.utill.CacheUtil;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -68,6 +69,9 @@ public class FksbUserServiceImpl  implements FksbUserService {
     @Autowired
     private Map<String,Object> orgcdMaxMpcd;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
  
 
     
@@ -105,8 +109,9 @@ public class FksbUserServiceImpl  implements FksbUserService {
         if(!boole){
             return 1;//注册失败
         }
-
-        return returnsign;
+        //如果注册成功把数据放入redis中
+        redisTemplate.opsForHash().put("equuidTompcd",fksbInserModel.getEquicd(),fksbInserModel.getMpCd());
+       return returnsign;
     }
     @Transactional
     public boolean inserData(FksbInserModel fksbInserModel,FksbUserVO fksbUserVO){

@@ -8,6 +8,7 @@ import com.fksb.supportmothord.model.WtAdTownVO;
 import com.fksb.supportmothord.model.WtAdVillageVO;
 
 import java.util.List;
+import java.util.Map;
 
 
 /*
@@ -28,4 +29,10 @@ public interface FksbEnrolService {
 
 
     boolean  isNullEquiid(FksbInserModel fksbInserModel);
+
+
+    /*扫一扫rudis规则*/
+
+    Map<String,Object> getequiidRule(String orgCd);
+
 }

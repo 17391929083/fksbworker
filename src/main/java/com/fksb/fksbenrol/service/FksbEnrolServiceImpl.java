@@ -16,9 +16,12 @@ import com.fksb.utill.CacheUtil;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,6 +48,9 @@ public class FksbEnrolServiceImpl  implements FksbEnrolService {
 
     @Autowired
     private WtEquiMprMapper wtEquiMprMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
 
@@ -118,5 +124,17 @@ public class FksbEnrolServiceImpl  implements FksbEnrolService {
 
     }
 
+    @Override
+    public Map<String, Object> getequiidRule(String orgCd) {
+
+        Object obj = redisTemplate.opsForHash().get("ruleOrgcd",orgCd);
+        Map<String,Object> map=new HashMap<>();
+        map.put("orgCd",orgCd);
+        map.put("length",obj);
+        return map;
+    }
+
+    
+    
 
 }

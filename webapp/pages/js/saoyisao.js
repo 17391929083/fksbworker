@@ -34,8 +34,14 @@ function  saoyisao(div){
             scanType: ["qrCode","barCode","datamatrix","pdf417"], // 可以指定扫二维码还是一维码，默认二者都有
             success: function (res) {
                 var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+                var  json=AjaxAction("get","../fksbEnrolController/getequiidrule");
 
-                $("#"+div).val(result.trim().substring(9));
+                if(json.length!=null){
+                    //
+                    $("#"+div).val(result.trim().substring(json.length));
+                }else{
+                    $("#"+div).val(result.trim().substring(9));
+                }
             }
         });
 

@@ -20,6 +20,7 @@ import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.listener.api.ChannelAwareMessageListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -45,6 +46,9 @@ public class MainTainServiceRabbitMq implements ChannelAwareMessageListener {
     @Autowired
     private WtEquiMpRepairMapper wtEquiMpRepairMapper;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Override
     public void onMessage(Message message, Channel channel) throws Exception {
         //获取消息的id 用于签收
@@ -60,7 +64,7 @@ public class MainTainServiceRabbitMq implements ChannelAwareMessageListener {
         //更改用水量
          int i = this.changeWater(fksbMainTainVO);
          //增加换表记录
-            int changeRecodeid = this.hangeFksbRecords(fksbMainTainVO);
+          int changeRecodeid = this.hangeFksbRecords(fksbMainTainVO);
 
 
 
@@ -150,6 +154,9 @@ public class MainTainServiceRabbitMq implements ChannelAwareMessageListener {
      wtEquiMpRepairVO.setModifytime(new Date());
      wtEquiMpRepairVO.setRepDesc("云控水表设备更换:  新设备编号"+fksbMainTainVO.getNewEquiid()+" 旧设备编号"+fksbMainTainVO.getOldEquiid()+" 维护人手机号"+wxBdWaterVOS.getPhone());
      int i = wtEquiMpRepairMapper.insertSelective(wtEquiMpRepairVO);
+
+     redisTemplate.opsForHash().delete("equuidTompcd",fksbMainTainVO.getOldEquiid());
+     redisTemplate.opsForHash().put("equuidTompcd",fksbMainTainVO.getOldEquiid(),wtEquiMprVO.getMpCd());
      return i;
  }
 
