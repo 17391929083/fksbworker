@@ -32,6 +32,10 @@ public class FksbDataMprRtrVO {
 
     private Long eqStates;
 
+    private BigDecimal waterMoney;
+
+    private int deductingType;
+
 
     public String getOrgNm() {
         return orgNm;
@@ -103,5 +107,21 @@ public class FksbDataMprRtrVO {
 
     public void setEqStates(Long eqStates) {
         this.eqStates = eqStates;
+    }
+
+    public BigDecimal getWaterMoney() {
+        return waterMoney;
+    }
+
+    public void setWaterMoney(BigDecimal waterMoney) {
+        this.waterMoney = waterMoney;
+    }
+
+    public int getDeductingType() {
+        return deductingType;
+    }
+
+    public void setDeductingType(int deductingType) {
+        this.deductingType = deductingType;
     }
 }

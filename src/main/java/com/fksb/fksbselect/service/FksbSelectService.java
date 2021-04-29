@@ -4,6 +4,7 @@ import com.fksb.fksbselect.model.FksbDataMprRtrVO;
 import com.fksb.fksbselect.model.FksbInfoZncbVO;
 import com.fksb.fksbselect.model.WtFksbDataRtrVO;
 import com.fksb.fksbuser.model.WtEquiMpZncdVO;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface FksbSelectService {
     *
     * 查询水表上报信息
     * */
-    FksbDataMprRtrVO selectMprFksbRtr(String equiid);
+    FksbDataMprRtrVO selectMprFksbRtr(Model model, String equiid);
 
 
     /*

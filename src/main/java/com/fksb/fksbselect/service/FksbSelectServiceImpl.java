@@ -9,13 +9,18 @@ import com.fksb.fksbselect.model.WtFksbDataRtrVO;
 import com.fksb.fksbuser.mapper.WtEquiMpZncdMapper;
 import com.fksb.fksbuser.model.WtEquiMpZncdVO;
 import com.fksb.fksbuser.model.WtEquiMpZncdVOExample;
+import com.fksb.supportmothord.mapper.ZtapwaterPaymentByUserMapper;
 import com.fksb.supportmothord.model.WtWaterpriceVO;
+import com.fksb.supportmothord.model.ZtapwaterPaymentByUserVO;
+import com.fksb.supportmothord.model.ZtapwaterPaymentByUserVOExample;
 import com.fksb.utill.CacheUtil;
+import com.fksb.utill.FksbToolsUtill;
 import com.fksb.worker.utill.RandUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -45,12 +50,19 @@ public class FksbSelectServiceImpl implements FksbSelectService {
       @Autowired
       private HttpSession session;
 
+
+      @Autowired
+       private ZtapwaterPaymentByUserMapper ztapwaterPaymentByUserMapper;
+
+   
+
+
     /*
     *
     * 查询水表上报信息
     * */
     @Override
-    public FksbDataMprRtrVO selectMprFksbRtr(String equiid) throws  NullPointerException{
+    public FksbDataMprRtrVO selectMprFksbRtr(Model model, String equiid) throws  NullPointerException{
         FksbDataMprRtrVO fksbDataMprRtrVO=new FksbDataMprRtrVO();
         Object orgCd = session.getAttribute("orgCd");
         WtFksbDataRtrVO wtFksbDataRtrVO = wtFksbDataRtrMapper.selectMprFksbRtr(equiid,orgCd.toString());
@@ -68,13 +80,29 @@ public class FksbSelectServiceImpl implements FksbSelectService {
         fksbDataMprRtrVO.setTotalQty(wtFksbDataRtrVO.getTotalQty().setScale(2, BigDecimal.ROUND_HALF_UP));
         fksbDataMprRtrVO.setFmStates(wtFksbDataRtrVO.getValveS().longValue());
         fksbDataMprRtrVO.setSignals(wtFksbDataRtrVO.getSignals().longValue());
-        fksbDataMprRtrVO.setV(wtFksbDataRtrVO.getV());
+        fksbDataMprRtrVO.setV(FksbToolsUtill.setUToV(wtFksbDataRtrVO.getV()));
         LocalDate now = LocalDate.now();
         Instant instant = wtFksbDataRtrVO.getDtTt().toInstant();//(时间线上的一个瞬时点。)
         ZoneId zoneId = ZoneId.systemDefault();//{@code Europe/Paris}.(时区)
         LocalDate date = instant.atZone(zoneId).toLocalDate();
         fksbDataMprRtrVO.setEqStates(now.toEpochDay()- date.toEpochDay());
-      return  fksbDataMprRtrVO;
+        /*
+        * 查询水表注册基础数据
+        * */
+        FksbInfoZncbVO fksbInfoZncbVO = this.selectFksbInfo(wtFksbDataRtrVO.getMpCd(), equiid);
+
+        model.addAttribute("fksbInfoZncbVO",fksbInfoZncbVO);
+        /*查询数据用户水费 扣费方式*/
+
+        ZtapwaterPaymentByUserVOExample ztapwaterPaymentByUserVOExample= new ZtapwaterPaymentByUserVOExample();
+        ZtapwaterPaymentByUserVOExample.Criteria criteria = ztapwaterPaymentByUserVOExample.createCriteria();
+        criteria.andPhoneEqualTo(fksbInfoZncbVO.getPhone());
+
+        List<ZtapwaterPaymentByUserVO> ztapwaterPaymentByUserVOS = ztapwaterPaymentByUserMapper.selectByExample(ztapwaterPaymentByUserVOExample);
+        ZtapwaterPaymentByUserVO  ztapwaterPaymentByUserVO =ztapwaterPaymentByUserVOS.get(0);
+        fksbDataMprRtrVO.setWaterMoney(ztapwaterPaymentByUserVO.getBalance());
+        fksbDataMprRtrVO.setDeductingType(ztapwaterPaymentByUserVO.getStatus());
+        return  fksbDataMprRtrVO;
     }
 
     /*

@@ -172,6 +172,15 @@
 
 					<div class="ui-form-item ui-form-item-r ui-border-b">
 						<label>
+							剩余金额:
+						</label>
+						<input type="text" placeholder="剩余金额" style="margin-left:95px;"  value="${fksbDataMprRtrVO.waterMoney} "  disabled="true">
+						<!-- 若按钮不可点击则添加 disabled 类 -->
+						<button type="button" class="ui-border-l">元 按${fksbDataMprRtrVO.deductingType==0?"表":"户"}缴费</button>
+					</div>
+
+					<div class="ui-form-item ui-form-item-r ui-border-b">
+						<label>
 							累计水量:
 						</label>
 						<input type="text" placeholder="累计水量" style="margin-left:95px;"  value="${fksbDataMprRtrVO.accumuWater}"  disabled="true">
@@ -197,14 +206,14 @@
 						<label>
 							信号强度:
 						</label>
-						<input type="tel" placeholder="信号强度" value="${fksbDataMprRtrVO.signals>5?"信号正常":"信号较弱"}"  disabled="true">
+						<input type="tel" placeholder="信号强度" value="${fksbDataMprRtrVO.signals>12?"信号正常":"信号较弱"}(信号值:${fksbDataMprRtrVO.signals})  注:12以上为正常信号"  disabled="true">
 						</a>
 					</div>
 					<div class="ui-form-item ui-border-b">
 						<label>
 							电池电量:
 						</label>
-						<input type="tel" placeholder="电池电量" value="${fksbDataMprRtrVO.v>10?"电量正常":"电量较低"}"  disabled="true">
+						<input type="tel" placeholder="电池电量" value="${fksbDataMprRtrVO.v>10?"电量正常":"电量较低"}(${fksbDataMprRtrVO.v}%)"  disabled="true">
 						</a>
 					</div>
 					<div class="ui-form-item ui-border-b">

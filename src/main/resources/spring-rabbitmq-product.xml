@@ -15,9 +15,9 @@
         <rabbit:connection-factory id="connectionFactory"
                                    host="182.92.59.108"
                                    port="5672"
-                                   username="fksbtest"
-                                   password="fksbtest"
-                                   virtual-host="/fksbtest"
+                                   username="water"
+                                   password="water"       
+                                   virtual-host="/water"
                                    publisher-confirms="true"
                                    publisher-returns="true"
         ></rabbit:connection-factory>

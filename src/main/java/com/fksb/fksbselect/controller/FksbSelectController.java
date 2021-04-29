@@ -45,16 +45,16 @@ public class FksbSelectController {
 
             return  view;
         }
-     String   equiid=equiidVO.getEquiId();//"1201100809";
+            String   equiid=equiidVO.getEquiId();//"1201100809";
         try{
             //查询数据信息
-            FksbDataMprRtrVO fksbDataMprRtrVO = fksbSelectService.selectMprFksbRtr(equiid);
+            FksbDataMprRtrVO fksbDataMprRtrVO = fksbSelectService.selectMprFksbRtr(model, equiid);
             model.addAttribute("fksbDataMprRtrVO",fksbDataMprRtrVO);
-            FksbInfoZncbVO fksbInfoZncbVO = fksbSelectService.selectFksbInfo(fksbDataMprRtrVO.getMpcd(), equiid);
-            model.addAttribute("fksbInfoZncbVO",fksbInfoZncbVO);
+//            FksbInfoZncbVO fksbInfoZncbVO = fksbSelectService.selectFksbInfo(fksbDataMprRtrVO.getMpcd(), equiid);
+//            model.addAttribute("fksbInfoZncbVO",fksbInfoZncbVO);
             view.setViewName("/select/select");
          }catch (NullPointerException ex){
-            model.addAttribute("exception","请使用水表所在账号登录扫码");
+            model.addAttribute("exception","数据不全,请联系运维人员");
             model.addAttribute("tishi","空指针异常");
             model.addAttribute("returnsys","/fksbworker/fksbSelectController/scanningCode");
             model.addAttribute("returnhome","/fksbworker/workHomeController/index");

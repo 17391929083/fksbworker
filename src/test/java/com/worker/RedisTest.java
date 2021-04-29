@@ -40,9 +40,9 @@ public class RedisTest {
 //        Set<String> keys = redisTemplate.keys("*");
 //        redisTemplate.delete(keys);
         //2.发送消息
-      //  redisTemplate.opsForHash().put("ruleOrgcd","610113010",0);
+        //redisTemplate.opsForHash().put("ruleOrgcd","610113010",0);
       
-        System.out.println(redisTemplate.opsForHash().get("equuidTompcd","2009100255"));
+        System.out.println(redisTemplate.opsForHash().entries("equuidTompcd"));
     }
 
 
